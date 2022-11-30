@@ -1,0 +1,184 @@
+import pygame
+pygame.init()
+pygame.display.set_mode((600,700))
+clock=pygame.time.clock
+running=True
+
+
+S = [['.....',
+      '......',
+      '..00..',
+      '.00...',
+      '.....'],
+     ['.....',
+      '..0..',
+      '..00.',
+      '...0.',
+      '.....']]
+
+Z = [['.....',
+      '.....',
+      '.00..',
+      '..00.',
+      '.....'],
+     ['.....',
+      '..0..',
+      '.00..',
+      '.0...',
+      '.....']]
+
+I = [['..0..',
+      '..0..',
+      '..0..',
+      '..0..',
+      '.....'],
+     ['.....',
+      '0000.',
+      '.....',
+      '.....',
+      '.....']]
+
+O = [['.....',
+      '.....',
+      '.00..',
+      '.00..',
+      '.....']]
+
+J = [['.....',
+      '.0...',
+      '.000.',
+      '.....',
+      '.....'],
+     ['.....',
+      '..00.',
+      '..0..',
+      '..0..',
+      '.....'],
+     ['.....',
+      '.....',
+      '.000.',
+      '...0.',
+      '.....'],
+     ['.....',
+      '..0..',
+      '..0..',
+      '.00..',
+      '.....']]
+
+L = [['.....',
+      '...0.',
+      '.000.',
+      '.....',
+      '.....'],
+     ['.....',
+      '..0..',
+      '..0..',
+      '..00.',
+      '.....'],
+     ['.....',
+      '.....',
+      '.000.',
+      '.0...',
+      '.....'],
+     ['.....',
+      '.00..',
+      '..0..',
+      '..0..',
+      '.....']]
+
+T = [['.....',
+      '..0..',
+      '.000.',
+      '.....',
+      '.....'],
+     ['.....',
+      '..0..',
+      '..00.',
+      '..0..',
+      '.....'],
+     ['.....',
+      '.....',
+      '.000.',
+      '..0..',
+      '.....'],
+     ['.....',
+      '..0..',
+      '.00..',
+      '..0..',
+      '.....']]
+
+forme=[T,S,L,J,O,I,Z]
+
+class Piece(object):
+    def __init__(self,colonne,ligne,forme):
+        self.x=colonne
+        self.y=ligne
+        self.couleur=couleur
+        self.rotation=0
+        self.forme=forme[rotation]
+       
+
+def creer_grille(dico_position={}):
+    grille=[[(0,0,0) for x in range(10)] for y in range(20)] #Chaque tuple représente une case avec en indication sa couleur
+
+#Ici le but est d'afficher la grille en fonction des informations stockées. 
+    for i in range (len(grille)):
+        for j in range(len(grille[i])):
+            if (j,i) in dico_position:
+                c = dico_position[(j,i)]
+                grille[i][j] = c
+    return grille
+
+
+def convertir_orientation_piece(piece):
+      evenements = pygame.event.get()
+      for evenement in evenements:
+            if evenement.type == pygame.KEYDOWN:
+                  if evenement.key == pygame.K_SPACE:
+                        l=len(piece.forme)
+                        if piece.rotation + 1 < l:
+                              piece.rotation+=1
+                        else:
+                              piece.rotation=0
+      
+
+def espace_valide(forme, grille):
+
+
+def verifier_defaite(positions):
+
+
+def get_shape():
+    global forme, couleur_forme
+
+
+def ecrire_texte_milieu (text, size, color, surface):
+
+
+def dessiner_grille(surface, row, col):
+
+
+def clear_rows(grid, locked):
+
+
+def draw_next_shape(shape, surface):
+
+
+def dessiner_fenetre(surface):
+
+
+def main():
+evenements = pygame.event.get()
+for evenement in evenements:
+    if evenement.type == pygame.KEYDOWN:
+        if evenement.key == pygame.K_LEFT:
+            Piece.x -= 1
+        if evenement.key == pygame.K_RIGHT:
+            Piece.x += 
+        if evenement.key == pygame.K_DOWN:
+            Piece.y -= 1
+
+def main_menu():
+
+
+main_menu()
