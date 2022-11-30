@@ -106,40 +106,42 @@ T = [['.....',
       '.00..',
       '..0..',
       '.....']]
+#Autre façon de voir les formes. A tester. Mettre toutes les coordonées des zéros dans des listes à l'intérieur d'une liste 
+T= [[[2,1],[2,2],[1,2],[3,2]],[[2,1],[2,2],[2,3],[3,2]],[[1,2],[2,2],[3,2],[2,3]],[[2,1],[2,2],[2,3],[1,2]]]
 
-forme=[T,S,L,J,O,I,Z]
+#Ainsi de suite avec les autres. Puis lier cela aux coordonnées de la pièce. Ex: le x et le y de la pièce représentent tout en haut à gauche de la pièce et
+#les x et y de combien on doit "bouger" pour tomber sur le bloc. Il faut donc considérer les blocs indépendamment. Peut être implémenter qqc dans la classe.
+   
 
-class Piece(object):
-    def __init__(self,colonne,ligne,forme):
+formes=[T,S,L,J,O,I,Z]
+class piece(object):
+    def __init__(self,colonne=4,ligne=0,forme):
         self.x=colonne
         self.y=ligne
-        self.couleur=couleur
+        self.couleur=self.forme.couleur
         self.rotation=0
-        self.forme=forme[rotation]
+        self.forme=forme[rotation] 
+        #Voir pour peut être ajouter un sous accès liste si on accède d'abord aux formes.
        
 
-def creer_grille(dico_position={}):
-    grille=[[(0,0,0) for x in range(10)] for y in range(20)] #Chaque tuple représente une case avec en indication sa couleur
-
-#Ici le but est d'afficher la grille en fonction des informations stockées. 
+def creer_grille(grille_finie={}):
+    grille=[[(0,0,0) for x in range(10)] for y in range(20)] #Reinitialisation de la grille. Le tuple indique la couleur
+    
+   #Ici le but est d'afficher la grille en fonction des informations stockées. 
     for i in range (len(grille)):
         for j in range(len(grille[i])):
-            if (j,i) in dico_position:
-                c = dico_position[(j,i)]
+            if (j,i) in grille_finie:
+                c = grille_finie[(j,i)]
                 grille[i][j] = c
     return grille
 
 
 def convertir_orientation_piece(piece):
-      evenements = pygame.event.get()
-      for evenement in evenements:
-            if evenement.type == pygame.KEYDOWN:
-                  if evenement.key == pygame.K_SPACE:
-                        l=len(piece.forme)
-                        if piece.rotation + 1 < l:
-                              piece.rotation+=1
-                        else:
-                              piece.rotation=0
+      l=len(piece.forme)
+      if piece.rotation + 1 < l:
+            piece.rotation+=1
+      else:
+            piece.rotation=0
       
 
 def espace_valide(forme, grille):
@@ -150,6 +152,9 @@ def verifier_defaite(positions):
 
 def get_shape():
     global forme, couleur_forme
+    random_index = random.randint(0,len(forme)-1)
+    piece.forme=forme[random_index]
+
 
 
 def ecrire_texte_milieu (text, size, color, surface):
@@ -158,7 +163,7 @@ def ecrire_texte_milieu (text, size, color, surface):
 def dessiner_grille(surface, row, col):
 
 
-def clear_rows(grid, locked):
+def clear_rows(grille, locked):
 
 
 def draw_next_shape(shape, surface):
@@ -177,8 +182,12 @@ for evenement in evenements:
             Piece.x += 
         if evenement.key == pygame.K_DOWN:
             Piece.y -= 1
+        if evenement.key == pygame.K_SPACE:
+            convertir_orientation_piece
 
 def main_menu():
-
+      #Print cliquer sur n'importe quelle touche au milieu en grand
+      if evenement.type == pygame.KEYDOWN:
+            main()
 
 main_menu()
