@@ -175,10 +175,11 @@ def get_shape():
 def ecrire_texte_milieu (texte, taille, couleur, surface):
 
 
-def dessiner_grille(surface, row, col):
+def dessiner_grille(surface, grille_finie):
+#Pour chaque élément dans la grille, dessiner sa couleur
 
 
-def retirer_lignes_pleine(grille, locked):
+def retirer_lignes_pleine(grille, grille_finie):
 #Si une ligne est remplie, la supprimer de grille finie. 
 #Mettre du while car plusieurs lignes peuvent être détruites à la fois
 
