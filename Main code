@@ -111,7 +111,9 @@ T= [[[2,1],[2,2],[1,2],[3,2]],[[2,1],[2,2],[2,3],[3,2]],[[1,2],[2,2],[3,2],[2,3]
 
 #Ainsi de suite avec les autres. Puis lier cela aux coordonnées de la pièce. Ex: le x et le y de la pièce représentent tout en haut à gauche de la pièce et
 #les x et y de combien on doit "bouger" pour tomber sur le bloc. Il faut donc considérer les blocs indépendamment. Peut être implémenter qqc dans la classe.
-   
+#Une chose à tester pour voir si la méthode est la bonne: implémenter une classe dans un autre fichier avec les 4 coordonnées du bloc. Voir si modifier
+#Le x et le y du bloc change bien les sous coordonnées automatiquement. En gros, est ce que le calcul se fait automatiquement. Je pense que oui mais j'aimerais
+#Être sûre. 
 
 formes=[T,S,L,J,O,I,Z]
 class piece(object):
@@ -122,6 +124,11 @@ class piece(object):
         self.rotation=0
         self.forme=forme[rotation] 
         #Voir pour peut être ajouter un sous accès liste si on accède d'abord aux formes.
+        self.bloc_1=[x+self.forme[0][0],y+self.forme[0][1]]
+        self.bloc_1=[x+self.forme[1][0],y+self.forme[1][1]]
+        self.bloc_1=[x+self.forme[2][0],y+self.forme[2][1]]
+        self.bloc_1=[x+self.forme[3][0],y+self.forme[3][1]]
+        
        
 
 def creer_grille(grille_finie={}):
@@ -144,10 +151,18 @@ def convertir_orientation_piece(piece):
             piece.rotation=0
       
 
-def espace_valide(forme, grille):
+def espace_valide(piece, grille):
+      #Tester pour les 4 coordonnées de piece si elles ne "fusionnent" pas avec une case non noir. Renvoyer True or False
+      
 
 
-def verifier_defaite(positions):
+def verifier_defaite(grille_finie):
+      i=0
+      while i<len(grille[0]):
+            if grille_finie[(0,i)]!=(0,0,0):
+                  return True
+            i=i+1
+      return False
 
 
 def get_shape():
@@ -157,16 +172,17 @@ def get_shape():
 
 
 
-def ecrire_texte_milieu (text, size, color, surface):
+def ecrire_texte_milieu (texte, taille, couleur, surface):
 
 
 def dessiner_grille(surface, row, col):
 
 
-def clear_rows(grille, locked):
+def retirer_lignes_pleine(grille, locked):
+#Si une ligne est remplie, la supprimer de grille finie. 
+#Mettre du while car plusieurs lignes peuvent être détruites à la fois
 
-
-def draw_next_shape(shape, surface):
+def dessiner_prochaine_piece(piece, surface):
 
 
 def dessiner_fenetre(surface):
@@ -177,13 +193,24 @@ evenements = pygame.event.get()
 for evenement in evenements:
     if evenement.type == pygame.KEYDOWN:
         if evenement.key == pygame.K_LEFT:
-            Piece.x -= 1
+            piece.x -= 1
+            if not(espace_valide(piece, grille)):
+                  piece.x+=1
         if evenement.key == pygame.K_RIGHT:
-            Piece.x += 
+            piece.x+=1
+            if not(espace_valide(piece, grille)):
+                  piece.x -= 1
         if evenement.key == pygame.K_DOWN:
-            Piece.y -= 1
+            piece.y+=1
+            if not(espace_valide(piece, grille)):
+                  piece.y -= 1
+                  #fin du tour. Enregistrer les coordonnées de la pièce dans grille finie
         if evenement.key == pygame.K_SPACE:
-            convertir_orientation_piece
+            piece_2=piece
+            convertir_orientation_piece(piece_2)
+            if espace_valide(piece_2, grille):
+                  convertir_orientation_piece(piece)
+
 
 def main_menu():
       #Print cliquer sur n'importe quelle touche au milieu en grand
