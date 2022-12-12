@@ -128,8 +128,66 @@ class piece(object):
         self.bloc_1=[x+self.forme[1][0],y+self.forme[1][1]]
         self.bloc_1=[x+self.forme[2][0],y+self.forme[2][1]]
         self.bloc_1=[x+self.forme[3][0],y+self.forme[3][1]]
-        
-       
+
+# ce que j'ai codé pour définir les blocs, c'est toujours la même idée mais je trouve ça plus clair que les tableaux S,Z,... au début
+# par contre il y a peut-être des erreurs ou oublis quand j'ai défini les propriété d'un bloc/tetros
+
+# les couleurs qui correspondent aux blocs dans le jeu classique
+couleur_forme = [[0, 255, 255], [255, 255, 0], [255, 0, 0], [0, 255, 0], [255, 0, 255], [255, 100 ,10], [0, 0, 100]] # cyan, jaune, rouge, vert, violet, orange, navy
+
+
+class Blocs :
+    def __init__(self, couleur,colonne=2,ligne=2) :
+        self.x = ligne
+        self.y = colonne
+        self.couleur = couleur_forme[]
+        self.rotation=0
+        self.forme=forme[rotation] # dans le sens trigo
+    
+
+    def tetros_1(self, colonne=1, ligne=4, couleur): # ligne cyan
+        self.x = colonne
+        self.y = ligne
+        self.shape = [[0,0,0,0], [1,1,1,1],[0,0,0,0],[0,0,0,0]], [[0,0,1,0],[0,0,1,0],[0,0,1,0],[0,0,1,0]]
+        self.couleur = couleur_forme[1]
+
+    def tetros_2(self, colonne=2, ligne=2, couleur): # carré jaune
+        self.x = colonne
+        self.y = ligne
+        self.shape = [[0,0,0,0], [0,1,1,0],[0,1,1,0],[0,0,0,0]] # pas de rotation, c'est la même chose
+        self.couleur = couleur_forme[2]
+    
+    def tetros_3(self, colonne=2, ligne=2, couleur): # S rouge
+        self.x = colonne
+        self.y = ligne
+        self.shape = [[0,0,1,0], [0,0,1,0],[0,1,0,0],[0,1,0,0]], [[0,0,0,0],[0,1,1,0],[0,0,1,1],[0,0,0,0]], [[0,0,1,0], [0,0,1,0],[0,1,0,0],[0,1,0,0]], [[0,0,0,0],[1,1,0,0],[0,1,1,0],[0,0,0,0]]
+        self.couleur = couleur_forme[3]
+    
+    def tetros_4(self, colonne=2, ligne=2, couleur): # Z vert
+        self.x = colonne
+        self.y = ligne
+        self.shape = [[0,1,0,0], [0,1,0,0],[0,0,1,0],[0,0,1,0]], [[0,0,0,0],[0,1,1,0],[1,1,0,0],[0,0,0,0]], [[0,1,0,0], [0,1,0,0],[0,0,1,0],[0,0,1,0]], [[0,0,0,0],[0,1,1,0],[1,1,0,0],[0,0,0,0]]
+        self.couleur = couleur_forme[4]
+    
+    def teros_5(self, colonne=3, ligne=2, couleur): # violet codé sur un carré 3x3
+        self.x = colonne
+        self.y = ligne
+        self.shape = [[0,0,0], [0,1,0], [1,1,1]], [[0,1,0],[0,1,1],[0,1,1]],[[0,0,0],[1,1,1],[0,1,0]], [[0,1,0],[1,1,0],[0,1,0]]
+        self.couleur = couleur_forme[5]
+    
+    def tetros_6(self, colonne=2, ligne=4, couleur): # L orange
+        self.x = colonne
+        self.y = ligne
+        self.shape = [[0,1,0,0],[0,1,0,0],[0,1,0,0],[0,1,1,0]], [[0,0,0,0],[1,1,1,1],[1,0,0,0],[0,0,0,0]], [[1,1,0,0],[0,1,0,0],[0,1,0,0],[0,1,0,0]],[[0,0,0,0],[1,0,0,0],[1,1,1,1],[0,0,0,0]]
+        self.couleur = couleur_forme[6]
+
+    def tetros_7(self,colonne=2, ligne=4, couleur):
+        self.x = colonne
+        self.y = ligne
+        self.shape = [[0,1,0,0],[0,1,0,0],[0,1,0,0],[1,1,0,0]], [[0,0,0,0],[1,0,0,0],[1,1,1,1],[0,0,0,0]], [[0,1,1,0],[0,1,0,0],[0,1,0,0],[0,1,0,0]],[[0,0,0,0],[1,1,1,1],[0,0,0,1],[0,0,0,0]]
+        self.couleur = couleur_forme[7]
+
+
 
 def creer_grille(grille_finie={}):
     grille=[[(0,0,0) for x in range(10)] for y in range(20)] #Reinitialisation de la grille. Le tuple indique la couleur
@@ -219,3 +277,5 @@ def main_menu():
             main()
 
 main_menu()
+
+
