@@ -207,11 +207,20 @@ def convertir_orientation_piece(piece):
             piece.rotation+=1
       else:
             piece.rotation=0
+            
+def save_dict (piece) :
+      for i in range (3) :  
+            grille_finie [(piece.bloc_i[0], piece.bloc_i[1])] = piece.couleur 
       
 
 def espace_valide(piece, grille):
       #Tester pour les 4 coordonnées de piece si elles ne "fusionnent" pas avec une case non noir. Renvoyer True or False
-      
+      for i in range (3) : 
+            if (piece.bloc_i[0], piece.bloc_i[1]) in grille_finie and if grille_finie [(self.bloc_i[0], self.bloc_i[1])] in couleur_forme : 
+		      return False 
+	      else :
+		      return True 
+
 
 
 def verifier_defaite(grille_finie):
@@ -235,6 +244,12 @@ def ecrire_texte_milieu (texte, taille, couleur, surface):
 
 def dessiner_grille(surface, grille_finie):
 #Pour chaque élément dans la grille, dessiner sa couleur
+      for i in range (20) : 
+            for j in range (10) : 
+                  if (j, i) in grille_finie :
+	                  for i in range (3) : 
+                              pygame.draw.rect(fenetre, grille[(j,i)], j, i, 1, 1)
+
 
 
 def retirer_lignes_pleine(grille, grille_finie):
