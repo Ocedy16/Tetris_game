@@ -125,9 +125,9 @@ class piece(object):
         self.forme=forme[rotation] 
         #Voir pour peut être ajouter un sous accès liste si on accède d'abord aux formes.
         self.bloc_1=[x+self.forme[0][0],y+self.forme[0][1]]
-        self.bloc_1=[x+self.forme[1][0],y+self.forme[1][1]]
-        self.bloc_1=[x+self.forme[2][0],y+self.forme[2][1]]
-        self.bloc_1=[x+self.forme[3][0],y+self.forme[3][1]]
+        self.bloc_2=[x+self.forme[1][0],y+self.forme[1][1]]
+        self.bloc_3=[x+self.forme[2][0],y+self.forme[2][1]]
+        self.bloc_4=[x+self.forme[3][0],y+self.forme[3][1]]
 
 # ce que j'ai codé pour définir les blocs, c'est toujours la même idée mais je trouve ça plus clair que les tableaux S,Z,... au début
 # par contre il y a peut-être des erreurs ou oublis quand j'ai défini les propriété d'un bloc/tetros
@@ -251,10 +251,23 @@ def dessiner_grille(surface, grille_finie):
                               pygame.draw.rect(fenetre, grille[(j,i)], j, i, 1, 1)
 
 
-
+def effacer_ligne(grille_finie,i):
+	for j in range (10):
+		grille_finie[i][j]==(0,0,0)
+		
 def retirer_lignes_pleine(grille, grille_finie):
-#Si une ligne est remplie, la supprimer de grille finie. 
-#Mettre du while car plusieurs lignes peuvent être détruites à la fois
+	while i<20:
+		while j<10:
+			if grille_finie[i][j]==(0,0,0):
+				i=i+1
+				j=0
+			else:
+				j=j+1
+		effacer_ligne(grille_finie,i)
+		j=0
+		i=i+1	
+			
+
 
 def dessiner_prochaine_piece(piece, surface):
 
