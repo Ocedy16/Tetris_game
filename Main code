@@ -1,6 +1,8 @@
 import pygame
+from pygame.locals import * # importer les constantes 
 pygame.init()
-pygame.display.set_mode((600,700))
+fenetre=pygame.display.set_mode((600,700))
+fenetre.fill((255,255,255)) #pour avoir un fond blanc
 clock=pygame.time.clock
 running=True
 
@@ -249,7 +251,8 @@ def dessiner_grille(surface, grille_finie):
                   if (j, i) in grille_finie :
 	                  for i in range (3) : 
                               pygame.draw.rect(fenetre, grille[(j,i)], j, i, 1, 1)
-
+pygame.display.update()
+pygame.init()
 
 def effacer_ligne(grille_finie,i):
 	for j in range (10):
