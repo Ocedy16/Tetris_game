@@ -1,10 +1,6 @@
 import pygame
-from pygame.locals import * # importer les constantes 
-pygame.init()
-fenetre=pygame.display.set_mode((600,700))
-fenetre.fill((255,255,255)) #pour avoir un fond blanc
-clock=pygame.time.Clock
-running=True
+from pygame.locals import * # importer les constantes
+
 
 
 S = [['.....',
@@ -108,23 +104,23 @@ T = [['.....',
       '.00..',
       '..0..',
       '.....']]
-#Autre façon de voir les formes. A tester. Mettre toutes les coordonées des zéros dans des listes à l'intérieur d'une liste 
+#Autre façon de voir les formes. A tester. Mettre toutes les coordonées des zéros dans des listes à l'intérieur d'une liste
 T= [[[2,1],[2,2],[1,2],[3,2]],[[2,1],[2,2],[2,3],[3,2]],[[1,2],[2,2],[3,2],[2,3]],[[2,1],[2,2],[2,3],[1,2]]]
 
 #Ainsi de suite avec les autres. Puis lier cela aux coordonnées de la pièce. Ex: le x et le y de la pièce représentent tout en haut à gauche de la pièce et
 #les x et y de combien on doit "bouger" pour tomber sur le bloc. Il faut donc considérer les blocs indépendamment. Peut être implémenter qqc dans la classe.
 #Une chose à tester pour voir si la méthode est la bonne: implémenter une classe dans un autre fichier avec les 4 coordonnées du bloc. Voir si modifier
 #Le x et le y du bloc change bien les sous coordonnées automatiquement. En gros, est ce que le calcul se fait automatiquement. Je pense que oui mais j'aimerais
-#Être sûre. 
+#Être sûre.
 
 formes=[T,S,L,J,O,I,Z]
 class piece(object):
-    def __init__(self,colonne=4,ligne=0,forme):
+    def __init__(self,formes,colonne=4,ligne=0):
         self.x=colonne
         self.y=ligne
-        self.couleur=self.forme.couleur
+        self.couleur=self.formes.couleur
         self.rotation=0
-        self.forme=forme[rotation] 
+        self.forme=forme[rotation]
         #Voir pour peut être ajouter un sous accès liste si on accède d'abord aux formes.
         self.bloc_1=[x+self.forme[0][0],y+self.forme[0][1]]
         self.bloc_2=[x+self.forme[1][0],y+self.forme[1][1]]
@@ -138,63 +134,12 @@ class piece(object):
 couleur_forme = [[0, 255, 255], [255, 255, 0], [255, 0, 0], [0, 255, 0], [255, 0, 255], [255, 100 ,10], [0, 0, 100]] # cyan, jaune, rouge, vert, violet, orange, navy
 
 
-class Blocs :
-    def __init__(self, couleur,colonne=2,ligne=2, rotation) :
-        self.x = ligne
-        self.y = colonne
-        self.couleur = couleur_forme[]
-        self.rotation=0
-        self.forme=forme[rotation] # dans le sens trigo
-    
-
-    def tetros_1(self, colonne=1, ligne=4, couleur): # ligne cyan
-        self.x = colonne
-        self.y = ligne
-        self.shape = [[0,0,0,0], [1,1,1,1],[0,0,0,0],[0,0,0,0]], [[0,0,1,0],[0,0,1,0],[0,0,1,0],[0,0,1,0]]
-        self.couleur = couleur_forme[1]
-
-    def tetros_2(self, colonne=2, ligne=2, couleur): # carré jaune
-        self.x = colonne
-        self.y = ligne
-        self.shape = [[0,0,0,0], [0,1,1,0],[0,1,1,0],[0,0,0,0]] # pas de rotation, c'est la même chose
-        self.couleur = couleur_forme[2]
-    
-    def tetros_3(self, colonne=2, ligne=2, couleur): # S rouge
-        self.x = colonne
-        self.y = ligne
-        self.shape = [[0,0,1,0], [0,0,1,0],[0,1,0,0],[0,1,0,0]], [[0,0,0,0],[0,1,1,0],[0,0,1,1],[0,0,0,0]], [[0,0,1,0], [0,0,1,0],[0,1,0,0],[0,1,0,0]], [[0,0,0,0],[1,1,0,0],[0,1,1,0],[0,0,0,0]]
-        self.couleur = couleur_forme[3]
-    
-    def tetros_4(self, colonne=2, ligne=2, couleur): # Z vert
-        self.x = colonne
-        self.y = ligne
-        self.shape = [[0,1,0,0], [0,1,0,0],[0,0,1,0],[0,0,1,0]], [[0,0,0,0],[0,1,1,0],[1,1,0,0],[0,0,0,0]], [[0,1,0,0], [0,1,0,0],[0,0,1,0],[0,0,1,0]], [[0,0,0,0],[0,1,1,0],[1,1,0,0],[0,0,0,0]]
-        self.couleur = couleur_forme[4]
-    
-    def tetros_5(self, colonne=3, ligne=2, couleur): # violet codé sur un carré 3x3
-        self.x = colonne
-        self.y = ligne
-        self.shape = [[0,0,0], [0,1,0], [1,1,1]], [[0,1,0],[0,1,1],[0,1,1]],[[0,0,0],[1,1,1],[0,1,0]], [[0,1,0],[1,1,0],[0,1,0]]
-        self.couleur = couleur_forme[5]
-    
-    def tetros_6(self, colonne=2, ligne=4, couleur): # L orange
-        self.x = colonne
-        self.y = ligne
-        self.shape = [[0,1,0,0],[0,1,0,0],[0,1,0,0],[0,1,1,0]], [[0,0,0,0],[1,1,1,1],[1,0,0,0],[0,0,0,0]], [[1,1,0,0],[0,1,0,0],[0,1,0,0],[0,1,0,0]],[[0,0,0,0],[1,0,0,0],[1,1,1,1],[0,0,0,0]]
-        self.couleur = couleur_forme[6]
-
-    def tetros_7(self,colonne=2, ligne=4, couleur): # _| navy
-        self.x = colonne
-        self.y = ligne
-        self.shape = [[0,1,0,0],[0,1,0,0],[0,1,0,0],[1,1,0,0]], [[0,0,0,0],[1,0,0,0],[1,1,1,1],[0,0,0,0]], [[0,1,1,0],[0,1,0,0],[0,1,0,0],[0,1,0,0]],[[0,0,0,0],[1,1,1,1],[0,0,0,1],[0,0,0,0]]
-        self.couleur = couleur_forme[7]
-
 
 
 def creer_grille(grille_finie={}):
     grille=[[(0,0,0) for x in range(10)] for y in range(20)] #Reinitialisation de la grille. Le tuple indique la couleur
-    
-   #Ici le but est d'afficher la grille en fonction des informations stockées. 
+
+   #Ici le but est d'afficher la grille en fonction des informations stockées.
     for i in range (len(grille)):
         for j in range(len(grille[i])):
             if (j,i) in grille_finie:
@@ -209,19 +154,19 @@ def convertir_orientation_piece(piece):
             piece.rotation+=1
       else:
             piece.rotation=0
-            
+
 def save_dict (piece) :
-      for i in range (3) :  
-            grille_finie [(piece.bloc_i[0], piece.bloc_i[1])] = piece.couleur 
-      
+      for i in range (3) :
+            grille_finie [(piece.bloc_i[0], piece.bloc_i[1])] = piece.couleur
+
 
 def espace_valide(piece, grille):
       #Tester pour les 4 coordonnées de piece si elles ne "fusionnent" pas avec une case non noir. Renvoyer True or False
-      for i in range (3) : 
-            if (piece.bloc_i[0], piece.bloc_i[1]) in grille_finie and if grille_finie [(self.bloc_i[0], self.bloc_i[1])] in couleur_forme : 
-		      return False 
-	      else :
-		      return True 
+      for i in range (3) :
+            if (piece.bloc_i[0], piece.bloc_i[1]) in grille_finie and grille_finie [(self.bloc_i[0], self.bloc_i[1])] in couleur_forme :
+                return False
+            else :
+                return True
 
 
 
@@ -241,73 +186,71 @@ def get_shape():
 
 
 def ecrire_texte_milieu (texte, taille, couleur, surface):
+    return 0
 
 
-def dessiner_grille(grille_finie):
+def dessiner_grille(grille):
 #Pour chaque élément dans la grille, dessiner sa couleur
-      for i in range (20) : 
-            for j in range (10) : 
-                  if (j, i) in grille_finie :
-	                  for i in range (3) : 
-                              pygame.draw.rect(fenetre, grille[(j,i)], j, i, 1, 1)
-pygame.display.update()
-pygame.init()
+    for i in range (20) :
+        for j in range (10) :
+                #if (j, i) in grille_finie :
+                    #for i in range (3) :
+            pygame.draw.rect(fenetre, grille[i][j], (50+j*15, 50+i*15, 13, 13))
+    pygame.display.update()
+    pygame.init()
 
 def effacer_ligne(grille_finie,i):
-	for j in range (10):
-		grille_finie[i][j]==(0,0,0)
-		
+    for j in range (10):
+        grille_finie[i][j]==(0,0,0)
+
 def retirer_lignes_pleine(grille, grille_finie):
-	while i<20:
-		while j<10:
-			if grille_finie[i][j]==(0,0,0):
-				i=i+1
-				j=0
-			else:
-				j=j+1
-		effacer_ligne(grille_finie,i)
-		j=0
-		i=i+1	
-			
+    while i<20:
+        while j<10:
+            if grille_finie[i][j]==(0,0,0):
+                i=i+1
+                j=0
+            else:
+                j=j+1
+        effacer_ligne(grille_finie,i)
+        j=0
+        i=i+1
 
 
-def dessiner_prochaine_piece(piece, surface):
-
-
-def dessiner_fenetre(surface):
 
 
 def main():
-grille_finie={}
-grille=creer_grille(grille_finie)
-dessiner_grille(grille_finie)
-while running=True:
-	grille=creer_grille
-	evenements = pygame.event.get()
-	for evenement in evenements:
-    	if evenement.type==pygame.QUIT:
-    		running = False
-        	pygame.display.quit()
-    	if evenement.type == pygame.KEYDOWN:
-     	   if evenement.key == pygame.K_LEFT:
-      	      piece.x -= 1
-       	     if not(espace_valide(piece, grille)):
-        	          piece.x+=1
-        	if evenement.key == pygame.K_RIGHT:
-         	   piece.x+=1
-          	  if not(espace_valide(piece, grille)):
-           	       piece.x -= 1
-        	if evenement.key == pygame.K_DOWN:
-         	   piece.y+=1
-          	  if not(espace_valide(piece, grille)):
-           	       piece.y -= 1
+    clock=pygame.time.Clock
+    running=True
+    grille_finie={}
+    grille=creer_grille(grille_finie)
+    dessiner_grille(grille)
+    while running==True:
+        grille=creer_grille(grille_finie)
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                running = False
+                pygame.display.quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    piece.x -= 1
+                    if not(espace_valide(piece, grille)):
+                        piece.x+=1
+                if event.key == pygame.K_RIGHT:
+                    piece.x+=1
+                    if not(espace_valide(piece, grille)):
+                        piece.x -= 1
+                if event.key == pygame.K_DOWN:
+                        piece.y+=1
+                        if not(espace_valide(piece, grille)):
+                            piece.y -= 1
                   #fin du tour. Enregistrer les coordonnées de la pièce dans grille finie
-        	if evenement.key == pygame.K_SPACE:
-         	   piece_2=piece
-         	   convertir_orientation_piece(piece_2)
-          	  if espace_valide(piece_2, grille):
-           	       convertir_orientation_piece(piece)
-           	       
+                if event.key == pygame.K_SPACE:
+                    piece_2=piece
+                    convertir_orientation_piece(piece_2)
+                if espace_valide(piece_2, grille):
+                    convertir_orientation_piece(piece)
+
+
 
 
 
@@ -315,7 +258,9 @@ def main_menu():
       #Print cliquer sur n'importe quelle touche au milieu en grand
       if evenement.type == pygame.KEYDOWN:
             main()
-
-main_menu()
+pygame.init()
+fenetre=pygame.display.set_mode((600,700))
+fenetre.fill((255,255,255)) #pour avoir un fond blanc
+main()
 
 
