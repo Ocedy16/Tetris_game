@@ -236,8 +236,7 @@ def verifier_defaite(grille_finie):
 
 def get_shape():
     global forme, couleur_forme
-    random_index = random.randint(0,len(forme)-1)
-    piece.forme=forme[random_index]
+    return Piece(5, 0, random.choice(forme)
 
 
 
