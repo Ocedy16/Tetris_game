@@ -171,7 +171,7 @@ class Blocs :
         self.shape = [[0,1,0,0], [0,1,0,0],[0,0,1,0],[0,0,1,0]], [[0,0,0,0],[0,1,1,0],[1,1,0,0],[0,0,0,0]], [[0,1,0,0], [0,1,0,0],[0,0,1,0],[0,0,1,0]], [[0,0,0,0],[0,1,1,0],[1,1,0,0],[0,0,0,0]]
         self.couleur = couleur_forme[4]
     
-    def teros_5(self, colonne=3, ligne=2, couleur): # violet codé sur un carré 3x3
+    def tetros_5(self, colonne=3, ligne=2, couleur): # violet codé sur un carré 3x3
         self.x = colonne
         self.y = ligne
         self.shape = [[0,0,0], [0,1,0], [1,1,1]], [[0,1,0],[0,1,1],[0,1,1]],[[0,0,0],[1,1,1],[0,1,0]], [[0,1,0],[1,1,0],[0,1,0]]
