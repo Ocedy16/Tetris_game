@@ -236,7 +236,7 @@ def verifier_defaite(grille_finie):
 
 def get_shape():
     global forme, couleur_forme
-    return Piece(5, 0, random.choice(forme)
+    return Piece(5, 0, random.choice(forme))
 
 
 
@@ -278,27 +278,33 @@ def dessiner_fenetre(surface):
 
 
 def main():
-evenements = pygame.event.get()
-for evenement in evenements:
-    if evenement.type == pygame.KEYDOWN:
-        if evenement.key == pygame.K_LEFT:
-            piece.x -= 1
-            if not(espace_valide(piece, grille)):
-                  piece.x+=1
-        if evenement.key == pygame.K_RIGHT:
-            piece.x+=1
-            if not(espace_valide(piece, grille)):
-                  piece.x -= 1
-        if evenement.key == pygame.K_DOWN:
-            piece.y+=1
-            if not(espace_valide(piece, grille)):
-                  piece.y -= 1
+while running=True:
+	evenements = pygame.event.get()
+	for evenement in evenements:
+    	if evenement.type==pygame.QUIT:
+    		running = False
+        	pygame.display.quit()
+    	if evenement.type == pygame.KEYDOWN:
+     	   if evenement.key == pygame.K_LEFT:
+      	      piece.x -= 1
+       	     if not(espace_valide(piece, grille)):
+        	          piece.x+=1
+        	if evenement.key == pygame.K_RIGHT:
+         	   piece.x+=1
+          	  if not(espace_valide(piece, grille)):
+           	       piece.x -= 1
+        	if evenement.key == pygame.K_DOWN:
+         	   piece.y+=1
+          	  if not(espace_valide(piece, grille)):
+           	       piece.y -= 1
                   #fin du tour. Enregistrer les coordonnées de la pièce dans grille finie
-        if evenement.key == pygame.K_SPACE:
-            piece_2=piece
-            convertir_orientation_piece(piece_2)
-            if espace_valide(piece_2, grille):
-                  convertir_orientation_piece(piece)
+        	if evenement.key == pygame.K_SPACE:
+         	   piece_2=piece
+         	   convertir_orientation_piece(piece_2)
+          	  if espace_valide(piece_2, grille):
+           	       convertir_orientation_piece(piece)
+           	       
+
 
 
 def main_menu():
