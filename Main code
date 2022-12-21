@@ -114,7 +114,7 @@ T= [[[2,1],[2,2],[1,2],[3,2]],[[2,1],[2,2],[2,3],[3,2]],[[1,2],[2,2],[3,2],[2,3]
 #Être sûre.
 
 formes=[T,S,L,J,O,I,Z]
-class piece(object):
+class Piece(object):
     def __init__(self,formes,colonne=4,ligne=0):
         self.x=colonne
         self.y=ligne
@@ -156,17 +156,19 @@ def convertir_orientation_piece(piece):
             piece.rotation=0
 
 def save_dict (piece) :
-      for i in range (3) :
-            grille_finie [(piece.bloc_i[0], piece.bloc_i[1])] = piece.couleur
+    grille_finie [(piece.bloc_1[0], piece.bloc_1[1])] = piece.couleur
+    grille_finie [(piece.bloc_2[0], piece.bloc_2[1])] = piece.couleur
+    grille_finie [(piece.bloc_3[0], piece.bloc_3[1])] = piece.couleur
+    grille_finie [(piece.bloc_4[0], piece.bloc_4[1])] = piece.couleur
+  
 
 
 def espace_valide(piece, grille):
       #Tester pour les 4 coordonnées de piece si elles ne "fusionnent" pas avec une case non noir. Renvoyer True or False
-      for i in range (3) :
-            if (piece.bloc_i[0], piece.bloc_i[1]) in grille_finie and grille_finie [(self.bloc_i[0], self.bloc_i[1])] in couleur_forme :
-                return False
-            else :
-                return True
+      if ((piece.bloc_1[0], piece.bloc_1[1]) in grille_finie) or ((piece.bloc_1[0], piece.bloc_1[1]) in grille_finie) or ((piece.bloc_1[0], piece.bloc_1[1]) in grille_finie) or ((piece.bloc_1[0], piece.bloc_1[1]) in grille_finie) :
+            return False
+      else :
+            return True
 
 
 
@@ -181,7 +183,7 @@ def verifier_defaite(grille_finie):
 
 def get_shape():
     global forme, couleur_forme
-    return Piece(5, 0, random.choice(forme))
+    return Piece(random.choice(forme), 5, 0)
 
 
 
