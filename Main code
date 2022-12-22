@@ -276,7 +276,6 @@ def main():
                               piece.deplacer()
                               dessiner_piece(piece)
                   
-                  
                 if event.key == pygame.K_SPACE:
                     #piece_2=piece
                     convertir_orientation_piece(piece)
