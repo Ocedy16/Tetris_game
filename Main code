@@ -267,9 +267,9 @@ def main():
                         dessiner_piece(piece)
                 if event.key == pygame.K_DOWN:
                         piece.y+=1
-                        if not(espace_valide(piece, grille)):
+                        if not(espace_valide(piece, grille_finie)):
                             piece.y -= 1
-                            #fin du tour. Enregistrer les coordonnées de la pièce dans grille finie
+                            
                         else:
                               grille=creer_grille(grille_finie)
                               dessiner_grille(grille)
