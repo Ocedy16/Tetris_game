@@ -132,6 +132,12 @@ class Piece(object):
         self.bloc_2=[self.x+self.forme[1][0],self.y+self.forme[1][1]]
         self.bloc_3=[self.x+self.forme[2][0],self.y+self.forme[2][1]]
         self.bloc_4=[self.x+self.forme[3][0],self.y+self.forme[3][1]]
+    def tourner (self):
+        self.forme=forme[self.rotation]
+        self.bloc_1=[self.x+self.forme[0][0],self.y+self.forme[0][1]]
+        self.bloc_2=[self.x+self.forme[1][0],self.y+self.forme[1][1]]
+        self.bloc_3=[self.x+self.forme[2][0],self.y+self.forme[2][1]]
+        self.bloc_4=[self.x+self.forme[3][0],self.y+self.forme[3][1]]
       
 
 # ce que j'ai codé pour définir les blocs, c'est toujours la même idée mais je trouve ça plus clair que les tableaux S,Z,... au début
@@ -283,7 +289,7 @@ def main():
                         convertir_orientation_piece(piece)
                         grille=creer_grille(grille_finie)
                         dessiner_grille(grille)
-                        piece.deplacer()
+                        piece.tourner()
                         dessiner_piece(piece)
 
 
