@@ -164,7 +164,7 @@ def save_dict (piece) :
   
 
 
-def espace_valide(piece, grille):
+def espace_valide(piece, grille_finie):
       #Tester pour les 4 coordonnées de piece si elles ne "fusionnent" pas avec une case non noir. Renvoyer True or False
       if ((piece.bloc_1[0], piece.bloc_1[1]) in grille_finie) or ((piece.bloc_2[0], piece.bloc_2[1]) in grille_finie) or ((piece.bloc_3[0], piece.bloc_3[1]) in grille_finie) or ((piece.bloc_4[0], piece.bloc_4[1]) in grille_finie) :
             return False
@@ -263,8 +263,8 @@ def main():
                 if event.key == pygame.K_SPACE:
                     piece_2=piece
                     convertir_orientation_piece(piece_2)
-                if espace_valide(piece_2, grille):
-                    convertir_orientation_piece(piece)
+                    if espace_valide(piece_2, grille):
+                        convertir_orientation_piece(piece)
 
 
 def main_menu():
