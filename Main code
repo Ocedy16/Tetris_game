@@ -269,13 +269,23 @@ def main():
                         piece.y+=1
                         if not(espace_valide(piece, grille)):
                             piece.y -= 1
-                  #fin du tour. Enregistrer les coordonnées de la pièce dans grille finie
+                            #fin du tour. Enregistrer les coordonnées de la pièce dans grille finie
+                        else:
+                              grille=creer_grille(grille_finie)
+                              dessiner_grille(grille)
+                              piece.deplacer()
+                              dessiner_piece(piece)
+                  
                   
                 if event.key == pygame.K_SPACE:
                     piece_2=piece
                     convertir_orientation_piece(piece_2)
                     if espace_valide(piece_2, grille):
                         convertir_orientation_piece(piece)
+                        grille=creer_grille(grille_finie)
+                        dessiner_grille(grille)
+                        piece.deplacer()
+                        dessiner_piece(piece)
 
 
 def main_menu():
