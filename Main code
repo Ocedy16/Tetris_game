@@ -132,7 +132,7 @@ class Piece(object):
         self.bloc_2=[self.x+self.forme[1][0],self.y+self.forme[1][1]]
         self.bloc_3=[self.x+self.forme[2][0],self.y+self.forme[2][1]]
         self.bloc_4=[self.x+self.forme[3][0],self.y+self.forme[3][1]]
-    def tourner (self):
+    def tourner (self,forme):
         self.forme=forme[self.rotation]
         self.bloc_1=[self.x+self.forme[0][0],self.y+self.forme[0][1]]
         self.bloc_2=[self.x+self.forme[1][0],self.y+self.forme[1][1]]
@@ -168,7 +168,7 @@ def convertir_orientation_piece(piece):
       else:
             piece.rotation=0
 
-def save_dict (piece) :
+def save_dict (piece,grille_finie) :
     grille_finie [(piece.bloc_1[0], piece.bloc_1[1])] = piece.couleur
     grille_finie [(piece.bloc_2[0], piece.bloc_2[1])] = piece.couleur
     grille_finie [(piece.bloc_3[0], piece.bloc_3[1])] = piece.couleur
@@ -275,6 +275,8 @@ def main():
                         piece.y+=1
                         if not(espace_valide(piece, grille_finie)):
                             piece.y -= 1
+                            save.dict(piece,grille_finie)
+                            get_shape()
                             
                         else:
                               grille=creer_grille(grille_finie)
