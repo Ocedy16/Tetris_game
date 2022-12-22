@@ -116,17 +116,23 @@ T= [[[2,1],[2,2],[1,2],[3,2]],[[2,1],[2,2],[2,3],[3,2]],[[1,2],[2,2],[3,2],[2,3]
 
 formes=[T,S,L,J,O,I,Z]
 class Piece(object):
-    def __init__(self,formes,colonne,ligne):
+    def __init__(self,forme,colonne,ligne):
         self.x=colonne
         self.y=ligne
         self.couleur=self.formes.couleur
         self.rotation=0
-        self.forme=forme[rotation]
+        self.forme=forme[self.rotation]
         #Voir pour peut être ajouter un sous accès liste si on accède d'abord aux formes.
-        self.bloc_1=[x+self.forme[0][0],y+self.forme[0][1]]
-        self.bloc_2=[x+self.forme[1][0],y+self.forme[1][1]]
-        self.bloc_3=[x+self.forme[2][0],y+self.forme[2][1]]
-        self.bloc_4=[x+self.forme[3][0],y+self.forme[3][1]]
+        self.bloc_1=[self.x+self.forme[0][0],self.y+self.forme[0][1]]
+        self.bloc_2=[self.x+self.forme[1][0],self.y+self.forme[1][1]]
+        self.bloc_3=[self.x+self.forme[2][0],self.y+self.forme[2][1]]
+        self.bloc_4=[self.x+self.forme[3][0],self.y+self.forme[3][1]]
+    def deplacer(self):
+        self.bloc_1=[self.x+self.forme[0][0],self.y+self.forme[0][1]]
+        self.bloc_2=[self.x+self.forme[1][0],self.y+self.forme[1][1]]
+        self.bloc_3=[self.x+self.forme[2][0],self.y+self.forme[2][1]]
+        self.bloc_4=[self.x+self.forme[3][0],self.y+self.forme[3][1]]
+      
 
 # ce que j'ai codé pour définir les blocs, c'est toujours la même idée mais je trouve ça plus clair que les tableaux S,Z,... au début
 # par contre il y a peut-être des erreurs ou oublis quand j'ai défini les propriété d'un bloc/tetros
@@ -137,7 +143,7 @@ couleur_forme = [[0, 255, 255], [255, 255, 0], [255, 0, 0], [0, 255, 0], [255, 0
 
 
 
-def creer_grille(grille_finie={}):
+def creer_grille(grille_finie):
     grille=[[(0,0,0) for x in range(10)] for y in range(20)] #Reinitialisation de la grille. Le tuple indique la couleur
 
    #Ici le but est d'afficher la grille en fonction des informations stockées.
@@ -183,8 +189,8 @@ def verifier_defaite(grille_finie):
 
 
 def get_shape():
-    global forme, couleur_forme
-    return Piece(random.choice(forme), 3, -1)
+    global formes, couleur_forme
+    return Piece(random.choice(formes), 3, -1)
     
 def dessiner_piece(new_piece):
       pygame.draw.rect(fenetre, new_piece.couleur, (50+new_piece.bloc_1[0]*15, 50+new_piece.bloc_1[1]*15, 13, 13))
@@ -226,17 +232,15 @@ def retirer_lignes_pleine(grille, grille_finie):
         i=i+1
 
 
-
-
 def main():
     clock=pygame.time.Clock
     running=True
     grille_finie={}
     grille=creer_grille(grille_finie)
     dessiner_grille(grille)
+    piece=get_shape()
+    dessiner_piece(piece)
     while running==True:
-        piece=get_shape()
-        dessiner_piece(piece)
         grille=creer_grille(grille_finie)
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
@@ -249,11 +253,18 @@ def main():
                         piece.x+=1
                     else:
                         grille=creer_grille(grille_finie)
+                        dessiner_grille(grille)
+                        piece.deplacer()
                         dessiner_piece(piece)
                 if event.key == pygame.K_RIGHT:
                     piece.x+=1
                     if not(espace_valide(piece, grille)):
                         piece.x -= 1
+                    else:
+                        grille=creer_grille(grille_finie)
+                        dessiner_grille(grille)
+                        piece.deplacer()
+                        dessiner_piece(piece)
                 if event.key == pygame.K_DOWN:
                         piece.y+=1
                         if not(espace_valide(piece, grille)):
