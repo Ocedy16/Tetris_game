@@ -235,8 +235,8 @@ def main():
     grille=creer_grille(grille_finie)
     dessiner_grille(grille)
     while running==True:
-        new_piece=get_shape()
-        dessiner_piece(new_piece)
+        piece=get_shape()
+        dessiner_piece(piece)
         grille=creer_grille(grille_finie)
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
@@ -247,6 +247,9 @@ def main():
                     piece.x -= 1
                     if not(espace_valide(piece, grille)):
                         piece.x+=1
+                    else:
+                        grille=creer_grille(grille_finie)
+                        dessiner_piece(piece)
                 if event.key == pygame.K_RIGHT:
                     piece.x+=1
                     if not(espace_valide(piece, grille)):
@@ -256,6 +259,7 @@ def main():
                         if not(espace_valide(piece, grille)):
                             piece.y -= 1
                   #fin du tour. Enregistrer les coordonnées de la pièce dans grille finie
+                  
                 if event.key == pygame.K_SPACE:
                     piece_2=piece
                     convertir_orientation_piece(piece_2)
