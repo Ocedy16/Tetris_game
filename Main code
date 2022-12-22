@@ -184,7 +184,7 @@ def verifier_defaite(grille_finie):
 
 def get_shape():
     global forme, couleur_forme
-    return Piece(random.choice(forme), 5, 0)
+    return Piece(random.choice(forme), 3, -1)
     
 def dessine_piece(new_piece):
       pygame.draw.rect(fenetre, new_piece.couleur, (50+new_piece.bloc_1[0]*15, 50+new_piece.bloc_1[1]*15, 13, 13))
