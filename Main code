@@ -158,7 +158,7 @@ def creer_grille(grille_finie):
 def convertir_orientation_piece(piece):
       l=len(piece.forme)
       if (piece.rotation + 1) < l:
-            piece.rotation+=1
+            piece.rotation=piece.rotation+1
       else:
             piece.rotation=0
 
