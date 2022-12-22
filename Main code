@@ -116,7 +116,7 @@ T= [[[2,1],[2,2],[1,2],[3,2]],[[2,1],[2,2],[2,3],[3,2]],[[1,2],[2,2],[3,2],[2,3]
 
 formes=[T,S,L,J,O,I,Z]
 class Piece(object):
-    def __init__(self,formes,colonne=4,ligne=0):
+    def __init__(self,formes,colonne,ligne):
         self.x=colonne
         self.y=ligne
         self.couleur=self.formes.couleur
