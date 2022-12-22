@@ -235,6 +235,8 @@ def main():
     grille=creer_grille(grille_finie)
     dessiner_grille(grille)
     while running==True:
+        new_piece=get_shape()
+        dessiner_piece(new_piece)
         grille=creer_grille(grille_finie)
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
@@ -259,9 +261,6 @@ def main():
                     convertir_orientation_piece(piece_2)
                 if espace_valide(piece_2, grille):
                     convertir_orientation_piece(piece)
-
-
-
 
 
 def main_menu():
