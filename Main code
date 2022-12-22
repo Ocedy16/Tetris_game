@@ -186,7 +186,7 @@ def get_shape():
     global forme, couleur_forme
     return Piece(random.choice(forme), 3, -1)
     
-def dessine_piece(new_piece):
+def dessiner_piece(new_piece):
       pygame.draw.rect(fenetre, new_piece.couleur, (50+new_piece.bloc_1[0]*15, 50+new_piece.bloc_1[1]*15, 13, 13))
       pygame.draw.rect(fenetre, new_piece.couleur, (50+new_piece.bloc_2[0]*15, 50+new_piece.bloc_2[1]*15, 13, 13))
       pygame.draw.rect(fenetre, new_piece.couleur, (50+new_piece.bloc_3[0]*15, 50+new_piece.bloc_3[1]*15, 13, 13))
