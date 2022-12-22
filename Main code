@@ -157,7 +157,7 @@ def creer_grille(grille_finie):
 
 def convertir_orientation_piece(piece):
       l=len(piece.forme)
-      if piece.rotation + 1 < l:
+      if (piece.rotation + 1) < l:
             piece.rotation+=1
       else:
             piece.rotation=0
@@ -278,9 +278,9 @@ def main():
                   
                   
                 if event.key == pygame.K_SPACE:
-                    piece_2=piece
-                    convertir_orientation_piece(piece_2)
-                    if espace_valide(piece_2, grille):
+                    #piece_2=piece
+                    convertir_orientation_piece(piece)
+                    if espace_valide(piece, grille_finie):
                         convertir_orientation_piece(piece)
                         grille=creer_grille(grille_finie)
                         dessiner_grille(grille)
