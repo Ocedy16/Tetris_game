@@ -254,6 +254,7 @@ def main():
     dessiner_grille(grille)
     piece=get_shape()
     dessiner_piece(piece)
+    fall_time=0
     while running==True:
         fall_speed = 0.27
         
