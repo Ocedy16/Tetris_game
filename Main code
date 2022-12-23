@@ -249,10 +249,20 @@ def main():
     image_time = 0
     while running==True:
         current_time = pygame.time.get_ticks()
-        if image_time > 0 and current_time >= image_time:
+        if image_time >= 0 and current_time >= image_time:
             image_time = current_time + 1000
         if current_time >= image_time:
             piece.y+=1
+            if not(espace_valide(piece, grille_finie)):
+                            piece.y -= 1
+                            save.dict(piece,grille_finie)
+                            get_shape()
+                            
+            else:
+                  grille=creer_grille(grille_finie)
+                  dessiner_grille(grille)
+                  piece.deplacer()
+                  dessiner_piece(piece)
         grille=creer_grille(grille_finie)
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
