@@ -127,6 +127,7 @@ class Piece(object):
         self.x=colonne
         self.y=ligne
         self.couleur=self.formes.couleur
+        self.lettre=forme
         self.rotation=0
         self.forme=forme[self.rotation]
         #Voir pour peut être ajouter un sous accès liste si on accède d'abord aux formes.
@@ -315,14 +316,14 @@ def main():
                   
                 if event.key == pygame.K_SPACE:
                     convertir_orientation_piece(piece)
-                    piece.tourner()
+                    piece.tourner(piece.lettre)
                     if not(espace_valide(piece, grille)):
                         piece.rotation=(piece.rotation-1)%len(piece.forme)
                         piece.tourner()
                     else:
                         grille=creer_grille(grille_finie)
                         dessiner_grille(grille)
-                        piece.tourner()
+                        piece.tourner(piece.lettre)
                         dessiner_piece(piece)
 
 
