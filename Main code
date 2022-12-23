@@ -256,9 +256,9 @@ def main():
         if current_time >= image_time:
             piece.y+=1
             if not(espace_valide(piece, grille_finie)):
-                            piece.y -= 1
-                            save.dict(piece,grille_finie)
-                            get_shape()
+                  piece.y -= 1
+                  save.dict(piece,grille_finie)
+                  get_shape()
                             
             else:
                   grille=creer_grille(grille_finie)
@@ -273,8 +273,10 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
                     piece.x -= 1
+                    piece.deplacer()
                     if not(espace_valide(piece, grille)):
                         piece.x+=1
+                        piece.deplacer()
                     else:
                         grille=creer_grille(grille_finie)
                         dessiner_grille(grille)
@@ -282,8 +284,10 @@ def main():
                         dessiner_piece(piece)
                 if event.key == pygame.K_RIGHT:
                     piece.x+=1
+                    piece.deplacer()
                     if not(espace_valide(piece, grille)):
                         piece.x -= 1
+                        piece.deplacer()
                     else:
                         grille=creer_grille(grille_finie)
                         dessiner_grille(grille)
