@@ -254,25 +254,21 @@ def main():
     dessiner_grille(grille)
     piece=get_shape()
     dessiner_piece(piece)
-    image_time = 0
     while running==True:
-        current_time = pygame.time.get_ticks()
-        grille=creer_grille(grille_finie)
-        if image_time >= 0 and current_time >= image_time:
-            image_time = current_time + 1000
-        if current_time >= image_time:
-            piece.y+=1
+        fall_speed = 0.27
+        
+        grille = creer_grille(grille_finie)
+        fall_time += clock.get_rawtime()
+        clock.tick()
+    
+        if fall_time/1000 >= fall_speed:
+            fall_time = 0
+            piece.y += 1
             piece.deplacer()
-            if not(espace_valide(piece, grille_finie)):
-                  piece.y -= 1
-                  piece.deplacer()
-                  save.dict(piece,grille_finie)
-                  get_shape()
-            else:
-                  grille=creer_grille(grille_finie)
-                  dessiner_grille(grille)
-                  piece.deplacer()
-                  dessiner_piece(piece)
+            if not (espace_valide(piece, grille)) and piece.y > 0:
+                piece.y -= 1
+                piece.deplacer()
+
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
                 running = False
