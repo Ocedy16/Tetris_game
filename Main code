@@ -180,7 +180,7 @@ def save_dict (piece,grille_finie) :
 
 def espace_valide(piece, grille_finie):
       
-      if ((piece.bloc_1[0], piece.bloc_1[1]) in grille_finie) or ((piece.bloc_2[0], piece.bloc_2[1]) in grille_finie) or ((piece.bloc_3[0], piece.bloc_3[1]) in grille_finie) or ((piece.bloc_4[0], piece.bloc_4[1]) in grille_finie) :
+      if ((piece.bloc_1[0], piece.bloc_1[1]) in grille_finie) or ((piece.bloc_2[0], piece.bloc_2[1]) in grille_finie) or ((piece.bloc_3[0], piece.bloc_3[1]) in grille_finie) or ((piece.bloc_4[0], piece.bloc_4[1]) in grille_finie) or (piece.bloc_1[0] < 0) or (piece.bloc_1[0] > 9) or (piece.bloc_1[1]< 0) or (piece.bloc_1[1]> 19) or (piece.bloc_2[0] < 0) or (piece.bloc_2[0] > 9) or (piece.bloc_2[1]< 0) or (piece.bloc_2[1]> 19) or (piece.bloc_3[0] < 0) or (piece.bloc_3[0] > 9) or (piece.bloc_3[1]< 0) or (piece.bloc_3[1]> 19) or (piece.bloc_4[0] < 0) or (piece.bloc_4[0] > 9) or (piece.bloc_4[1]< 0) or (piece.bloc_4[1]> 19) : :
             return False
       else :
             return True
