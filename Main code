@@ -317,7 +317,7 @@ def main():
                     convertir_orientation_piece(piece)
                     piece.tourner()
                     if not(espace_valide(piece, grille)):
-                        piece.rotation=(piece.rotation-1)%len(piece.forme())
+                        piece.rotation=(piece.rotation-1)%len(piece.forme)
                         piece.tourner()
                     else:
                         grille=creer_grille(grille_finie)
