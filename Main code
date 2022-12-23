@@ -300,8 +300,10 @@ def main():
                         dessiner_piece(piece)
                 if event.key == pygame.K_DOWN:
                         piece.y+=1
+                        piece.deplacer()
                         if not(espace_valide(piece, grille_finie)):
                             piece.y -= 1
+                            piece.deplacer()
                             save.dict(piece,grille_finie)
                             get_shape()
                             
@@ -312,7 +314,6 @@ def main():
                               dessiner_piece(piece)
                   
                 if event.key == pygame.K_SPACE:
-                    #piece_2=piece
                     convertir_orientation_piece(piece)
                     if espace_valide(piece, grille_finie):
                         convertir_orientation_piece(piece)
