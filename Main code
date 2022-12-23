@@ -177,7 +177,7 @@ def save_dict (piece,grille_finie) :
 
 
 def espace_valide(piece, grille_finie):
-      #Tester pour les 4 coordonnées de piece si elles ne "fusionnent" pas avec une case non noir. Renvoyer True or False
+      
       if ((piece.bloc_1[0], piece.bloc_1[1]) in grille_finie) or ((piece.bloc_2[0], piece.bloc_2[1]) in grille_finie) or ((piece.bloc_3[0], piece.bloc_3[1]) in grille_finie) or ((piece.bloc_4[0], piece.bloc_4[1]) in grille_finie) :
             return False
       else :
@@ -239,14 +239,20 @@ def retirer_lignes_pleine(grille, grille_finie):
 
 
 def main():
-    clock=pygame.time.Clock
+    clock=pygame.time.Clock()
     running=True
     grille_finie={}
     grille=creer_grille(grille_finie)
     dessiner_grille(grille)
     piece=get_shape()
     dessiner_piece(piece)
+    image_time = 0
     while running==True:
+        current_time = pygame.time.get_ticks()
+        if image_time > 0 and current_time >= image_time:
+            image_time = current_time + 1000
+        if current_time >= image_time:
+            piece.y+=1
         grille=creer_grille(grille_finie)
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
