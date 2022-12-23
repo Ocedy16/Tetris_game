@@ -106,14 +106,12 @@ T = [['.....',
       '..0..',
       '.....']]
 #Autre façon de voir les formes. A tester. Mettre toutes les coordonées des zéros dans des listes à l'intérieur d'une liste
-
+T= [[[2,1],[2,2],[1,2],[3,2]],[[2,1],[2,2],[2,3],[3,2]],[[1,2],[2,2],[3,2],[2,3]],[[2,1],[2,2],[2,3],[1,2]]]
+L = [[[1,1],[1,2],[2,2],[3,2]],[[2,1],[2,2],[1,3],[2,3]],[[1,2],[2,2],[3,2],[3,3]],[[2,1],[3,1],[2,2],[2,3]]]
 S = [[[2,2],[3,2],[3,3],[4,3]],[[2,1],[1,2],[2,2],[1,3]]]
 Z = [[[2,2],[3,2],[1,3],[2,3]]]
 I = [[[2,0],[2,1],[2,2],[2,3]]]
 O = [[[2,2],[3,2],[2,3],[3,3]]]
-J = [[[3,1],[1,2],[2,2],[3,3]],[[1,1],[2,1],[2,2],[2,3]],[[1,2],[2,2],[3,2],[1,3]],[[2,1],[2,2],[2,3],[3,3]]]
-L = [[[1,1],[1,2],[2,2],[3,2]],[[2,1],[2,2],[1,3],[2,3]],[[1,2],[2,2],[3,2],[3,3]],[[2,1],[3,1],[2,2],[2,3]]]
-T= [[[2,1],[2,2],[1,2],[3,2]],[[2,1],[2,2],[2,3],[3,2]],[[1,2],[2,2],[3,2],[2,3]],[[2,1],[2,2],[2,3],[1,2]]]
 
 
 
@@ -259,21 +257,22 @@ def main():
     image_time = 0
     while running==True:
         current_time = pygame.time.get_ticks()
+        grille=creer_grille(grille_finie)
         if image_time >= 0 and current_time >= image_time:
             image_time = current_time + 1000
         if current_time >= image_time:
             piece.y+=1
+            piece.deplacer()
             if not(espace_valide(piece, grille_finie)):
                   piece.y -= 1
+                  piece.deplacer()
                   save.dict(piece,grille_finie)
                   get_shape()
-                            
             else:
                   grille=creer_grille(grille_finie)
                   dessiner_grille(grille)
                   piece.deplacer()
                   dessiner_piece(piece)
-        grille=creer_grille(grille_finie)
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
                 running = False
