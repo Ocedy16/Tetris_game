@@ -148,6 +148,8 @@ class Piece(object):
         self.bloc_4=[self.x+self.forme[3][0],self.y+self.forme[3][1]]
       
 
+# ce que j'ai codé pour définir les blocs, c'est toujours la même idée mais je trouve ça plus clair que les tableaux S,Z,... au début
+# par contre il y a peut-être des erreurs ou oublis quand j'ai défini les propriété d'un bloc/tetros
 
 # les couleurs qui correspondent aux blocs dans le jeu classique
 couleur_forme = [[0, 255, 255], [255, 255, 0], [255, 0, 0], [0, 255, 0], [255, 0, 255], [255, 100 ,10], [0, 0, 100]] # cyan, jaune, rouge, vert, violet, orange, navy
@@ -264,11 +266,14 @@ def main():
             if not (espace_valide(piece, grille)) and piece.y > 0:
                 piece.y -= 1
                 piece.deplacer()
+                save.dict(piece,grille_finie)
+                piece=get_shape()
+                
             else:
-                        grille=creer_grille(grille_finie)
-                        dessiner_grille(grille)
-                        piece.deplacer()
-                        dessiner_piece(piece)
+                grille=creer_grille(grille_finie)
+                dessiner_grille(grille)
+                piece.deplacer()
+                dessiner_piece(piece)
 
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
@@ -304,7 +309,7 @@ def main():
                             piece.y -= 1
                             piece.deplacer()
                             save.dict(piece,grille_finie)
-                            get_shape()
+                            piece=get_shape()
                             
                         else:
                               grille=creer_grille(grille_finie)
