@@ -148,8 +148,6 @@ class Piece(object):
         self.bloc_4=[self.x+self.forme[3][0],self.y+self.forme[3][1]]
       
 
-# ce que j'ai codé pour définir les blocs, c'est toujours la même idée mais je trouve ça plus clair que les tableaux S,Z,... au début
-# par contre il y a peut-être des erreurs ou oublis quand j'ai défini les propriété d'un bloc/tetros
 
 # les couleurs qui correspondent aux blocs dans le jeu classique
 couleur_forme = [[0, 255, 255], [255, 255, 0], [255, 0, 0], [0, 255, 0], [255, 0, 255], [255, 100 ,10], [0, 0, 100]] # cyan, jaune, rouge, vert, violet, orange, navy
