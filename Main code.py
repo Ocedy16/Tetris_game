@@ -1,6 +1,7 @@
 import pygame
 import random
 from pygame.locals import *  # importer les constantes
+from pygame import mixer
 
 # Autre façon de voir les formes. A tester. Mettre toutes les coordonées des zéros dans des listes à l'intérieur d'une liste
 T = [[[2, 1], [2, 2], [1, 2], [3, 2]], [[2, 1], [2, 2], [2, 3], [3, 2]], [[1, 2], [2, 2], [3, 2], [2, 3]],
@@ -11,7 +12,7 @@ S = [[[2, 2], [3, 2], [3, 3], [4, 3]], [[2, 1], [1, 2], [2, 2], [1, 3]]]
 Z = [[[2, 2], [3, 2], [1, 3], [2, 3]]]
 I = [[[2, 0], [2, 1], [2, 2], [2, 3]]]
 O = [[[2, 2], [3, 2], [2, 3], [3, 3]]]
-J = [[[3,1],[1,2],[2,2],[3,3]],[[1,1],[2,1],[2,2],[2,3]],[[1,2],[2,2],[3,2],[1,3]],[[2,1],[2,2],[2,3],[3,3]]]
+J = [[[3, 1], [1, 2], [2, 2], [3, 3]], [[1, 1], [2, 1], [2, 2], [2, 3]], [[1, 2], [2, 2], [3, 2], [1, 3]], [[2, 1], [2, 2], [2, 3], [3, 3]]]
 
 
 # Ainsi de suite avec les autres. Puis lier cela aux coordonnées de la pièce. Ex: le x et le y de la pièce représentent tout en haut à gauche de la pièce et
@@ -21,7 +22,6 @@ J = [[[3,1],[1,2],[2,2],[3,3]],[[1,1],[2,1],[2,2],[2,3]],[[1,2],[2,2],[3,2],[1,3
 # Être sûre.
 
 formes = [T, S, L, Z,I,O,J]
-
 
 class Piece(object):
     def __init__(self, lettre, colonne, ligne):
@@ -156,19 +156,24 @@ def retirer_lignes_pleine(grille_finie):
                 j = 0
             else:
                 j = j + 1
-        effacer_ligne(grille_finie, i)
+        if i < 20:
+            effacer_ligne(grille_finie, i)
+            score = score + 10
         j = 0
         i = i + 1
-        
+
+#def afficher_score():
+    #ecrire le code
+
 def main_screen():
-    begin=True
+    begin = True
     pygame.display.set_caption('Tetris')
     font = pygame.font.SysFont('inkfree', 30, italic=True, bold=True)  # try inkfree, georgia,impact,dubai,arial
 
     text = font.render('Press any key to play', True,
                        (255, 255, 255))  # This creates a new Surface with the specified text rendered on it
     textrect = text.get_rect()
-    textrect.center = (500 // 2, 500 // 2)
+    textrect.center = (600 // 2, 700 // 2)
 
     while begin:
         fenetre.blit(text, textrect)
@@ -183,8 +188,9 @@ def main_screen():
 
             pygame.display.update()
 
-
 def main():
+    fenetre.fill((255, 255, 255))
+    score = 0
     clock = pygame.time.Clock()
     running = True
     grille_finie = {}
@@ -193,7 +199,9 @@ def main():
     piece = get_shape()
     dessiner_piece(piece)
     time_elapsed_since_last_action = 0
-    while running == True:
+
+
+    while running:
         dt = clock.tick()
         grille = creer_grille(grille_finie)
         time_elapsed_since_last_action += dt
@@ -268,9 +276,12 @@ def main():
                         piece.tourner()
                         dessiner_piece(piece)
         retirer_lignes_pleine(grille_finie)
+        #afficher_score()
 
 
 pygame.init()
 fenetre = pygame.display.set_mode((600, 700))
-fenetre.fill((255, 255, 255))  # pour avoir un fond blanc
+mixer.init()
+mixer.music.load('D:/Dossier Océane/Tetris_music.mp3')
+mixer.music.play()
 main_screen()
