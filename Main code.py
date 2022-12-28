@@ -68,8 +68,6 @@ class Piece(object):
 couleur_forme = [[0, 255, 255], [255, 255, 0], [255, 0, 0], [0, 255, 0], [255, 0, 255], [255, 100, 10],
                  [0, 0, 100]]  # cyan, jaune, rouge, vert, violet, orange, navy
 
-dico_forme_couleur = {formes[1]:couleur_forme[5], formes[2]:couleur_forme[4], formes[3]:couleur_forme[3], formes[4]:couleur_forme[7], formes[5]:couleur_forme[2], formes[6]:couleur_forme[1], formes[7]:couleur_forme[6]}
-
 
 def creer_grille(grille_finie):
     if type(grille_finie) == list: print('creer_grille errer')
@@ -138,6 +136,8 @@ def dessiner_grille(grille):
     # Pour chaque élément dans la grille, dessiner sa couleur
     for i in range(20):
         for j in range(10):
+            # if (j, i) in grille_finie :
+            # for i in range (3) :
             pygame.draw.rect(fenetre, grille[i][j], (50 + j * 15, 50 + i * 15, 13, 13))
     pygame.display.update()
     pygame.init()
@@ -148,7 +148,7 @@ def effacer_ligne(grille_finie, i):
         grille_finie[(i,j)] == (0, 0, 0)
 
 
-def retirer_lignes_pleine(grille, grille_finie):
+def retirer_lignes_pleine(grille_finie):
     while i < 20:
         while j < 10 or i < 20:
             if grille_finie[i][j] == (0, 0, 0):
@@ -159,7 +159,7 @@ def retirer_lignes_pleine(grille, grille_finie):
         effacer_ligne(grille_finie, i)
         j = 0
         i = i + 1
-     
+        
 def main_screen():
     begin=True
     pygame.display.set_caption('Tetris')
@@ -171,7 +171,7 @@ def main_screen():
     textrect.center = (500 // 2, 500 // 2)
 
     while begin:
-        screen.blit(text, textrect)
+        fenetre.blit(text, textrect)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -182,6 +182,7 @@ def main_screen():
                 main()
 
             pygame.display.update()
+
 
 def main():
     clock = pygame.time.Clock()
@@ -266,11 +267,10 @@ def main():
                         dessiner_grille(grille)
                         piece.tourner()
                         dessiner_piece(piece)
+        retirer_lignes_pleine(grille_finie)
 
 
-      
 pygame.init()
 fenetre = pygame.display.set_mode((600, 700))
 fenetre.fill((255, 255, 255))  # pour avoir un fond blanc
 main_screen()
-
