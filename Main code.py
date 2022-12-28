@@ -8,9 +8,9 @@ T = [[[2, 1], [2, 2], [1, 2], [3, 2]], [[2, 1], [2, 2], [2, 3], [3, 2]], [[1, 2]
 L = [[[1, 1], [1, 2], [2, 2], [3, 2]], [[2, 1], [2, 2], [1, 3], [2, 3]], [[1, 2], [2, 2], [3, 2], [3, 3]],
      [[2, 1], [3, 1], [2, 2], [2, 3]]]
 S = [[[2, 2], [3, 2], [3, 3], [4, 3]], [[2, 1], [1, 2], [2, 2], [1, 3]]]
-#Z = [[[2, 2], [3, 2], [1, 3], [2, 3]]]
-#I = [[[2, 0], [2, 1], [2, 2], [2, 3]]]
-#O = [[[2, 2], [3, 2], [2, 3], [3, 3]]]
+Z = [[[2, 2], [3, 2], [1, 3], [2, 3]]]
+I = [[[2, 0], [2, 1], [2, 2], [2, 3]]]
+O = [[[2, 2], [3, 2], [2, 3], [3, 3]]]
 
 # Ainsi de suite avec les autres. Puis lier cela aux coordonnées de la pièce. Ex: le x et le y de la pièce représentent tout en haut à gauche de la pièce et
 # les x et y de combien on doit "bouger" pour tomber sur le bloc. Il faut donc considérer les blocs indépendamment. Peut être implémenter qqc dans la classe.
