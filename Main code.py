@@ -134,8 +134,6 @@ def dessiner_grille(grille):
     # Pour chaque élément dans la grille, dessiner sa couleur
     for i in range(20):
         for j in range(10):
-            # if (j, i) in grille_finie :
-            # for i in range (3) :
             pygame.draw.rect(fenetre, grille[i][j], (50 + j * 15, 50 + i * 15, 13, 13))
     pygame.display.update()
     pygame.init()
@@ -148,7 +146,7 @@ def effacer_ligne(grille_finie, i):
 
 def retirer_lignes_pleine(grille, grille_finie):
     while i < 20:
-        while j < 10:
+        while j < 10 or i < 20:
             if grille_finie[i][j] == (0, 0, 0):
                 i = i + 1
                 j = 0
