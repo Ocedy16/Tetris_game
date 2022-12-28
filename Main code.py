@@ -159,7 +159,29 @@ def retirer_lignes_pleine(grille, grille_finie):
         effacer_ligne(grille_finie, i)
         j = 0
         i = i + 1
+     
+def main_screen():
+    begin=True
+    pygame.display.set_caption('Tetris')
+    font = pygame.font.SysFont('inkfree', 30, italic=True, bold=True)  # try inkfree, georgia,impact,dubai,arial
 
+    text = font.render('Press any key to play', True,
+                       (255, 255, 255))  # This creates a new Surface with the specified text rendered on it
+    textrect = text.get_rect()
+    textrect.center = (500 // 2, 500 // 2)
+
+    while begin:
+        screen.blit(text, textrect)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.display.quit()
+                quit()
+            if event.type == pygame.KEYDOWN:
+                begin = False
+                main()
+
+            pygame.display.update()
 
 def main():
     clock = pygame.time.Clock()
@@ -246,8 +268,9 @@ def main():
                         dessiner_piece(piece)
 
 
+      
 pygame.init()
 fenetre = pygame.display.set_mode((600, 700))
 fenetre.fill((255, 255, 255))  # pour avoir un fond blanc
-main()
+main_screen()
 
