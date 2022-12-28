@@ -20,7 +20,7 @@ J = [[[3,1],[1,2],[2,2],[3,3]],[[1,1],[2,1],[2,2],[2,3]],[[1,2],[2,2],[3,2],[1,3
 # Le x et le y du bloc change bien les sous coordonnées automatiquement. En gros, est ce que le calcul se fait automatiquement. Je pense que oui mais j'aimerais
 # Être sûre.
 
-formes = [T, S, L]
+formes = [T, S, L, Z,I,O,J]
 
 
 class Piece(object):
