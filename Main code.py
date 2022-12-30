@@ -68,6 +68,7 @@ class Piece(object):
 couleur_forme = [[0, 255, 255], [255, 255, 0], [255, 0, 0], [0, 255, 0], [255, 0, 255], [255, 100, 10],
                  [0, 0, 100]]  # cyan, jaune, rouge, vert, violet, orange, navy
 
+dico_forme_couleur_tuple = {formes[1]:(255,0,255), formes[2]:(0,255,0), formes[3]:(255,0,0), formes[4]:(0,0,100), formes[5]:(255,255,0), formes[6]:(0,255,255), formes[7]:(255,100,10)}
 
 def creer_grille(grille_finie):
     if type(grille_finie) == list: print('creer_grille errer')
