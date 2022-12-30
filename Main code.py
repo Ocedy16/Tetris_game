@@ -158,24 +158,15 @@ def dessiner_grille(grille):
     pygame.init()
 
 
-def effacer_ligne(grille_finie, i):
-    for j in range(10):
-        grille_finie[(i,j)] == (0, 0, 0)
-
-
 def retirer_lignes_pleine(grille_finie):
-    while i < 20:
-        while j < 10 or i < 20:
-            if grille_finie[i][j] == (0, 0, 0):
-                i = i + 1
-                j = 0
-            else:
-                j = j + 1
-        if i < 20:
-            effacer_ligne(grille_finie, i)
-            score = score + 10
-        j = 0
-        i = i + 1
+    for j in range (20):
+      count=0
+      for i in range (10):
+              if (i,j) in grill_finie:
+                  count=count+1
+      if count==10:
+           for k in range (10):
+                  del (grille_finie[(i,j)])
 
 #def afficher_score():
     #ecrire le code
