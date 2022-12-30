@@ -170,7 +170,8 @@ def retirer_lignes_pleine(grille_finie):
           lignes_effacees.append(j)
           for k in range (10):
                  del grille_finie[(k,j)]
-    for l in range (nb_lignes):
+    if nb_lignes !=0:
+     for l in range (nb_lignes):
        for j in range (lignes_effacees[l]):
           for i in range(10):
                if (9-i,19-j) in grille_finie:
