@@ -301,6 +301,7 @@ def main():
         retirer_lignes_pleine(grille_finie)
         #afficher_score()
 
+          
 
 pygame.init()
 fenetre = pygame.display.set_mode((600, 700))
