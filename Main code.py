@@ -127,7 +127,21 @@ def dessiner_piece(new_piece):
     pygame.display.update()
     pygame.init()
 
-
+def dessiner_piece_suivante (piece_suivante):
+    pygame.draw.rect(fenetre, (255,255,255), (20*15,0*15,13*6,13*6))
+    new_piece = copy.deepcopy(piece_suivante)
+    new_piece.x = 20
+    new_piece.deplacer()
+    #print (new_piece.x)
+    new_piece.y = 0
+    new_piece.deplacer()
+    pygame.draw.rect(fenetre, new_piece.couleur,(new_piece.bloc_1[0]*15, new_piece.bloc_1[1]*15, 13, 13))
+    pygame.draw.rect(fenetre, new_piece.couleur, (new_piece.bloc_2[0]*15, new_piece.bloc_2[1]*15, 13, 13))
+    pygame.draw.rect(fenetre, new_piece.couleur, (new_piece.bloc_3[0]*15, new_piece.bloc_3[1]*15, 13, 13))
+    pygame.draw.rect(fenetre, new_piece.couleur, (new_piece.bloc_4[0]*15, new_piece.bloc_4[1]*15, 13, 13))
+    pygame.display.update()
+    pygame.init()
+     
 def ecrire_texte_milieu(texte, taille, couleur, surface):
     return 0
 
@@ -197,7 +211,9 @@ def main():
     grille = creer_grille(grille_finie)
     dessiner_grille(grille)
     piece = get_shape()
+    piece_suivante = get_shape()
     dessiner_piece(piece)
+    dessiner_piece_suivante(piece_suivante)
     time_elapsed_since_last_action = 0
 
 
@@ -213,14 +229,16 @@ def main():
                 piece.y -= 1
                 piece.deplacer()
                 save_dict(piece, grille_finie)
-                piece = get_shape()
+                piece = copy.deepcopy(piece_suivante)
+                piece_suivante = get_shape()
 
             else:
                 grille = creer_grille(grille_finie)
                 dessiner_grille(grille)
                 piece.deplacer()
                 dessiner_piece(piece)
-
+                dessiner_piece_suivante(piece_suivante)
+                    
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -237,6 +255,7 @@ def main():
                         dessiner_grille(grille)
                         piece.deplacer()
                         dessiner_piece(piece)
+                        dessiner_piece_suivante(piece_suivante)
                 if event.key == pygame.K_RIGHT:
                     piece.x += 1
                     piece.deplacer()
@@ -248,6 +267,7 @@ def main():
                         dessiner_grille(grille)
                         piece.deplacer()
                         dessiner_piece(piece)
+                        dessiner_piece_suivante(piece_suivante)
                 if event.key == pygame.K_DOWN:
                     piece.y += 1
                     piece.deplacer()
@@ -255,14 +275,16 @@ def main():
                         piece.y -= 1
                         piece.deplacer()
                         save_dict(piece, grille_finie)
-                        piece = get_shape()
+                        piece = copy.deepcopy(piece_suivante)
+                        piece_suivante = get_shape()
 
                     else:
                         grille = creer_grille(grille_finie)
                         dessiner_grille(grille)
                         piece.deplacer()
                         dessiner_piece(piece)
-
+                        dessiner_piece_suivante(piece_suivante)
+                    
                 if event.key == pygame.K_SPACE:
                     convertir_orientation_piece(piece)
                     #piece.tourner(piece.lettre)
@@ -275,6 +297,7 @@ def main():
                         dessiner_grille(grille)
                         piece.tourner()
                         dessiner_piece(piece)
+                        dessiner_piece_suivante(piece_suivante)            
         retirer_lignes_pleine(grille_finie)
         #afficher_score()
 
