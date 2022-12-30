@@ -146,7 +146,6 @@ def dessiner_piece_suivante (piece_suivante):
 def ecrire_texte_milieu(texte, taille, couleur, surface):
     return 0
 
-
 def dessiner_grille(grille):
     # Pour chaque élément dans la grille, dessiner sa couleur
     for i in range(20):
@@ -172,11 +171,11 @@ def retirer_lignes_pleine(grille_finie):
           for k in range (10):
                  del grille_finie[(k,j)]
     for l in range (nb_lignes):
-     for j in range (lignes_effacees[l]):
+       for j in range (lignes_effacees[l]):
           for i in range(10):
                if (9-i,19-j) in grille_finie:
                     couleur=grille_finie[(9-i,19-j)]
-                    grille_finie[(i,j+1)
+                    grille_finie[(9-i,(19-j)+1)]=couleur
                     
 
 #def afficher_score():
