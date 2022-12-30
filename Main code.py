@@ -159,14 +159,25 @@ def dessiner_grille(grille):
 
 
 def retirer_lignes_pleine(grille_finie):
+     nb_lignes=0
+     lignes_effacees=[]
     for j in range (20):
       count=0
       for i in range (10):
-              if (i,j) in grill_finie:
+              if (i,j) in grille_finie:
                   count=count+1
       if count==10:
-           for k in range (10):
-                  del (grille_finie[(i,j)])
+          nb_lignes=nb_lignes+1
+          lignes_effacees.append(j)
+          for k in range (10):
+                 del grille_finie[(k,j)]
+    for l in range (nb_lignes):
+     for j in range (lignes_effacees[l]):
+          for i in range(10):
+               if (9-i,19-j) in grille_finie:
+                    couleur=grille_finie[(9-i,19-j)]
+                    grille_finie[(i,j+1)
+                    
 
 #def afficher_score():
     #ecrire le code
