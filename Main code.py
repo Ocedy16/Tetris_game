@@ -71,7 +71,6 @@ couleur_forme = [[0, 255, 255], [255, 255, 0], [255, 0, 0], [0, 255, 0], [255, 0
 dico_forme_couleur_tuple = {formes[1]:(255,0,255), formes[2]:(0,255,0), formes[3]:(255,0,0), formes[4]:(0,0,100), formes[5]:(255,255,0), formes[6]:(0,255,255), formes[7]:(255,100,10)}
 
 def creer_grille(grille_finie):
-    if type(grille_finie) == list: print('creer_grille errer')
     grille = [[(0, 0, 0) for x in range(10)] for y in
               range(20)]  # Reinitialisation de la grille. Le tuple indique la couleur
 
@@ -82,6 +81,7 @@ def creer_grille(grille_finie):
                 c = grille_finie[(j, i)]
                 grille[i][j] = c
     return grille
+
 
 def convertir_orientation_piece(piece):
     l = len(piece.lettre)
@@ -128,23 +128,26 @@ def dessiner_piece(new_piece):
     pygame.display.update()
     pygame.init()
 
-def dessiner_piece_suivante (piece_suivante):
-    pygame.draw.rect(fenetre, (255,255,255), (20*15,0*15,13*6,13*6))
+
+def dessiner_piece_suivante(piece_suivante):
+    pygame.draw.rect(fenetre, (255, 255, 255), (20 * 15, 0 * 15, 13 * 6, 13 * 6))
     new_piece = copy.deepcopy(piece_suivante)
     new_piece.x = 20
     new_piece.deplacer()
-    #print (new_piece.x)
+    # print (new_piece.x)
     new_piece.y = 0
     new_piece.deplacer()
-    pygame.draw.rect(fenetre, new_piece.couleur,(new_piece.bloc_1[0]*15, new_piece.bloc_1[1]*15, 13, 13))
-    pygame.draw.rect(fenetre, new_piece.couleur, (new_piece.bloc_2[0]*15, new_piece.bloc_2[1]*15, 13, 13))
-    pygame.draw.rect(fenetre, new_piece.couleur, (new_piece.bloc_3[0]*15, new_piece.bloc_3[1]*15, 13, 13))
-    pygame.draw.rect(fenetre, new_piece.couleur, (new_piece.bloc_4[0]*15, new_piece.bloc_4[1]*15, 13, 13))
+    pygame.draw.rect(fenetre, new_piece.couleur, (new_piece.bloc_1[0] * 15, new_piece.bloc_1[1] * 15, 13, 13))
+    pygame.draw.rect(fenetre, new_piece.couleur, (new_piece.bloc_2[0] * 15, new_piece.bloc_2[1] * 15, 13, 13))
+    pygame.draw.rect(fenetre, new_piece.couleur, (new_piece.bloc_3[0] * 15, new_piece.bloc_3[1] * 15, 13, 13))
+    pygame.draw.rect(fenetre, new_piece.couleur, (new_piece.bloc_4[0] * 15, new_piece.bloc_4[1] * 15, 13, 13))
     pygame.display.update()
     pygame.init()
-     
+
+
 def ecrire_texte_milieu(texte, taille, couleur, surface):
     return 0
+
 
 def dessiner_grille(grille):
     # Pour chaque élément dans la grille, dessiner sa couleur
@@ -157,38 +160,35 @@ def dessiner_grille(grille):
     pygame.init()
 
 
-def retirer_lignes_pleine(grille_finie):
-     nb_lignes=0
-     lignes_effacees=[]
-    for j in range (20):
-      count=0
-      for i in range (10):
-              if (i,j) in grille_finie:
-                  count=count+1
-      if count==10:
-          nb_lignes=nb_lignes+1
-          lignes_effacees.append(j)
-          for k in range (10):
-                 del grille_finie[(k,j)]
-    if nb_lignes !=0:
-     for l in range (nb_lignes):
-       for j in range (lignes_effacees[l]):
-          for i in range(10):
-               if (9-i,19-j) in grille_finie:
-                    couleur=grille_finie[(9-i,19-j)]
-                    grille_finie[(9-i,(19-j)+1)]=couleur
-                    
+def retirer_lignes_pleine(grille,grille_finie):
+    inc = 0
+    for i in range(len(grille) - 1, -1, -1):
+        row = grille[i]
+        if (0, 0, 0) not in row:
+            inc += 1
+            # add positions to remove from locked
+            ind = i
+            for j in range(len(row)):
+                if grille_finie.get((j, i)):
+                    del grille_finie[(j, i)]
+    if inc > 0:
+        for key in sorted(list(grille_finie), key=lambda x: x[1])[::-1]:
+            x, y = key
+            if y < ind:
+                newKey = (x, y + inc)
+                grille_finie[newKey] = grille_finie.pop(key)
 
-#def afficher_score():
-    #ecrire le code
+
+# def afficher_score():
+# ecrire le code
 
 def main_screen():
     begin = True
     pygame.display.set_caption('Tetris')
-    font = pygame.font.SysFont('inkfree', 30, italic=True, bold=True)  # try inkfree, georgia,impact,dubai,arial
+    font = pygame.font.SysFont('inkfree', 30, italic=True, bold=True)  
 
     text = font.render('Press any key to play', True,
-                       (255, 255, 255))  # This creates a new Surface with the specified text rendered on it
+                       (255, 255, 255))  
     textrect = text.get_rect()
     textrect.center = (600 // 2, 700 // 2)
 
@@ -205,6 +205,7 @@ def main_screen():
 
             pygame.display.update()
 
+
 def main():
     fenetre.fill((255, 255, 255))
     score = 0
@@ -218,7 +219,6 @@ def main():
     dessiner_piece(piece)
     dessiner_piece_suivante(piece_suivante)
     time_elapsed_since_last_action = 0
-
 
     while running:
         dt = clock.tick()
@@ -241,7 +241,7 @@ def main():
                 piece.deplacer()
                 dessiner_piece(piece)
                 dessiner_piece_suivante(piece_suivante)
-                    
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -280,6 +280,7 @@ def main():
                         save_dict(piece, grille_finie)
                         piece = copy.deepcopy(piece_suivante)
                         piece_suivante = get_shape()
+                        retirer_lignes_pleine(grille, grille_finie)
 
                     else:
                         grille = creer_grille(grille_finie)
@@ -287,10 +288,11 @@ def main():
                         piece.deplacer()
                         dessiner_piece(piece)
                         dessiner_piece_suivante(piece_suivante)
-                    
+
+
                 if event.key == pygame.K_SPACE:
                     convertir_orientation_piece(piece)
-                    #piece.tourner(piece.lettre)
+                    # piece.tourner(piece.lettre)
                     piece.tourner()
                     if not (espace_valide(piece, grille_finie)):
                         piece.rotation = (piece.rotation - 1) % len(piece.forme)
@@ -300,15 +302,18 @@ def main():
                         dessiner_grille(grille)
                         piece.tourner()
                         dessiner_piece(piece)
-                        dessiner_piece_suivante(piece_suivante)            
-        retirer_lignes_pleine(grille_finie)
-        #afficher_score()
-
-          
+                        dessiner_piece_suivante(piece_suivante)
+        retirer_lignes_pleine(grille, grille_finie)
+        if verifier_defaite(grille_finie,grille):
+            running=False
+        # afficher_score()
+    #ecran de fin disant que tu as perdu. SI tu veux rejouer, appuie sur une touche, sinon quittes
 
 pygame.init()
 fenetre = pygame.display.set_mode((600, 700))
+"""
 mixer.init()
-mixer.music.load('D:/Dossier Océane/Tetris_music.mp3')
+mixer.music.load('D:/Dossier Océane/Tetris_music.mp3.mp3')
 mixer.music.play()
+"""
 main_screen()
