@@ -21,7 +21,7 @@ J = [[[3, 1], [1, 2], [2, 2], [3, 2]], [[1, 1], [2, 1], [2, 2], [2, 3]], [[1, 2]
 # Le x et le y du bloc change bien les sous coordonnées automatiquement. En gros, est ce que le calcul se fait automatiquement. Je pense que oui mais j'aimerais
 # Être sûre.
 
-formes = [T, S, L, Z,I,O,J]
+formes = [T, S, L, Z, I, O, J]
 
 class Piece(object):
     def __init__(self, lettre, colonne, ligne):
