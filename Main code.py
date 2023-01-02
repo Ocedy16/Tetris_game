@@ -204,7 +204,33 @@ def main_screen():
                 main()
 
             pygame.display.update()
+          
+def end_screen():
+    begin = True
+    pygame.display.set_caption('Tetris')
+    font = pygame.font.SysFont('inkfree', 30, italic=True, bold=True)  # try inkfree, georgia,impact,dubai,arial
 
+    text = font.render('You loose : press return key to play again, or press space key to end', True,
+                       (255, 255, 255))  # This creates a new Surface with the specified text rendered on it
+    textrect = text.get_rect()
+    textrect.center = (600 // 2, 700 // 2)
+
+    while begin:
+        fenetre.blit(text, textrect)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.display.quit()
+                quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE :
+                    pygame.display.quit()
+                    quit()
+                if event.key == pygame.K_RETURN:
+                    begin = False
+                    main()
+
+            pygame.display.update()
 
 def main():
     fenetre.fill((255, 255, 255))
@@ -308,6 +334,8 @@ def main():
             running=False
         # afficher_score()
     #ecran de fin disant que tu as perdu. SI tu veux rejouer, appuie sur une touche, sinon quittes
+     if verifier_defaite(grille_finie, grille) == True :
+          end_screen()
 
 pygame.init()
 fenetre = pygame.display.set_mode((600, 700))
