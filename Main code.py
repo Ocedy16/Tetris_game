@@ -2,6 +2,7 @@ import pygame
 import random
 from pygame.locals import *  # importer les constantes
 from pygame import mixer
+import copy
 
 # Autre façon de voir les formes. A tester. Mettre toutes les coordonées des zéros dans des listes à l'intérieur d'une liste
 T = [[[2, 1], [2, 2], [1, 2], [3, 2]], [[2, 1], [2, 2], [2, 3], [3, 2]], [[1, 2], [2, 2], [3, 2], [2, 3]],
