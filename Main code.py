@@ -24,15 +24,16 @@ J = [[[3, 1], [1, 2], [2, 2], [3, 2]], [[1, 1], [2, 1], [2, 2], [2, 3]], [[1, 2]
 formes = [T, S, L, Z, I, O, J]
 
 class Piece(object):
-    def __init__(self, lettre, colonne, ligne):
+    def __init__(self, lettre, couleur, colonne, ligne):
         self.x = colonne
         self.y = ligne
-        self.couleur = (random.randint(10, 254), random.randint(10, 254), random.randint(10, 254))
+        #self.couleur = (random.randint(10, 254), random.randint(10, 254), random.randint(10, 254))
+        self.couleur= couleur
         self.lettre = lettre
         self.rotation = 0
         self.forme = self.lettre[self.rotation]
         # Voir pour peut être ajouter un sous accès liste si on accède d'abord aux formes.
-        print(f"Piece Constructor / Forme : {self.forme} / X: {self.x} / Y: {self.y}")
+        #print(f"Piece Constructor / Forme : {self.forme} / X: {self.x} / Y: {self.y}")
         self.bloc_1 = [self.x + self.forme[0][0], self.y + self.forme[0][1]]
         self.bloc_2 = [self.x + self.forme[1][0], self.y + self.forme[1][1]]
         self.bloc_3 = [self.x + self.forme[2][0], self.y + self.forme[2][1]]
@@ -47,11 +48,11 @@ class Piece(object):
         self.blocs = [self.bloc_1, self.bloc_2, self.bloc_3, self.bloc_4]
 
     def tourner(self):
-        print("----------------------")
-        print(f"SELF Forme : {self.forme}")
-        print(f"SELF Lettre : {self.lettre}")
-        print(f"SELF Rotation : {self.rotation}")
-        print(f"Forme : {self.forme}")
+        #print("----------------------")
+        #print(f"SELF Forme : {self.forme}")
+        #print(f"SELF Lettre : {self.lettre}")
+        #print(f"SELF Rotation : {self.rotation}")
+        #print(f"Forme : {self.forme}")
         if self.rotation <= len(self.lettre):
             self.forme = self.lettre[self.rotation]
             self.bloc_1 = [self.x + self.forme[0][0], self.y + self.forme[0][1]]
@@ -109,15 +110,21 @@ def espace_valide(piece, grille_finie):
 def verifier_defaite(grille_finie, grille):
     i = 0
     while i < len(grille[0]):
-        if grille_finie[(0, i)] != (0, 0, 0):
+        if (0,i) in grille_finie:
             return True
         i = i + 1
     return False
 
+def verifier_defaite_debut(piece,grille_finie):
+     if espace_valide(piece, grille_finie)==False:
+          return False
+     return True
+
 
 def get_shape():
     global formes, couleur_forme
-    return Piece(random.choice(formes), 3, 0)
+    new_int=randint(0,7)
+    return Piece(formes[new_int],couleur_forme[new_int], 3, 0)
 
 
 def dessiner_piece(new_piece):
@@ -166,7 +173,6 @@ def retirer_lignes_pleine(grille,grille_finie):
         row = grille[i]
         if (0, 0, 0) not in row:
             inc += 1
-            # add positions to remove from locked
             ind = i
             for j in range(len(row)):
                 if grille_finie.get((j, i)):
@@ -211,7 +217,7 @@ def end_screen():
     font = pygame.font.SysFont('inkfree', 30, italic=True, bold=True)  # try inkfree, georgia,impact,dubai,arial
 
     text = font.render('You loose : press return key to play again, or press space key to end', True,
-                       (255, 255, 255))  # This creates a new Surface with the specified text rendered on it
+                       (255, 255, 255)) 
     textrect = text.get_rect()
     textrect.center = (600 // 2, 700 // 2)
 
@@ -250,7 +256,8 @@ def main():
         dt = clock.tick()
         grille = creer_grille(grille_finie)
         time_elapsed_since_last_action += dt
-        if time_elapsed_since_last_action > 1000:
+        vitesse=1
+        if time_elapsed_since_last_action+vitesse > 1000:
             time_elapsed_since_last_action = 0
             piece.y += 1
             piece.deplacer()
@@ -260,6 +267,9 @@ def main():
                 save_dict(piece, grille_finie)
                 piece = copy.deepcopy(piece_suivante)
                 piece_suivante = get_shape()
+                if verifier_defaite_debut(piece,grille_finie)==False:
+                    running=False
+                    end_screen()
 
             else:
                 grille = creer_grille(grille_finie)
@@ -306,6 +316,9 @@ def main():
                         save_dict(piece, grille_finie)
                         piece = copy.deepcopy(piece_suivante)
                         piece_suivante = get_shape()
+                        if verifier_defaite_debut(piece,grille_finie)==False:
+                              running=False
+                              end_screen()
                         retirer_lignes_pleine(grille, grille_finie)
 
                     else:
@@ -332,10 +345,9 @@ def main():
         retirer_lignes_pleine(grille, grille_finie)
         if verifier_defaite(grille_finie,grille):
             running=False
+            end_screen()
         # afficher_score()
-    #ecran de fin disant que tu as perdu. SI tu veux rejouer, appuie sur une touche, sinon quittes
-     if verifier_defaite(grille_finie, grille) == True :
-          end_screen()
+ 
 
 pygame.init()
 fenetre = pygame.display.set_mode((600, 700))
