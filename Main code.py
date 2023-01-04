@@ -124,7 +124,7 @@ def verifier_defaite_debut(piece,grille_finie):
 
 def get_shape():
     global formes, couleur_forme
-    new_int=randint(0,7)
+    new_int=random.randint(0,7)
     return Piece(formes[new_int],couleur_forme[new_int], 3, 0)
 
 
