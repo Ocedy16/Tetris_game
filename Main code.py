@@ -178,8 +178,39 @@ def retirer_lignes_pleine(grille_finie):
                     grille_finie[(9-i,(19-j)+1)]=couleur
                     
 
-#def afficher_score():
-    #ecrire le code
+def afficher_score(surface, grille, score = 0, score_fin = 0):
+    surface.fill((0, 0, 0))
+
+    pygame.font.init()
+    font = pygame.font.SysFont('Score', 60)
+    label = font.render('Tetris', 1, (255, 255, 255))
+
+    surface.blit(label, ((0,0,0) + 9 / 2 - (label.get_width() / 2), 30))
+
+    # current score
+    font = pygame.font.SysFont('Score', 30)
+    label = font.render('Score: ' + str(score), 1, (255,255,255))
+
+    sx = 0 + 9 + 50
+    sy = 0 + 19/2 - 100
+
+    surface.blit(label, (sx + 20, sy + 160))
+    # last score
+    label = font.render('High Score: ' + score_fin, 1, (255,255,255))
+
+    sx = 0 - 200
+    sy = 0 + 200
+
+    surface.blit(label, (sx + 20, sy + 160))
+
+    for i in range(len(grille)):
+        for j in range(len(grille[i])):
+            pygame.draw.rect(surface, grille[i][j], (0 + j*block_size, 0 + i*block_size, block_size, block_size), 0)
+
+    pygame.draw.rect(surface, (255, 0, 0), (0, 0, 9, 19), 5)
+
+    dessiner_grille(surface, grille)
+
 
 def main_screen():
     begin = True
