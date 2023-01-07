@@ -359,12 +359,6 @@ def main():
     #nb_lignes_prec = 0
 
     while running:
-        if verifier_defaite_debut(piece,grille_finie):
-            running=False
-            vitesse=0
-            niveau=0
-            score=0
-            end_screen()
 
         dt = clock.tick()
         grille = creer_grille(grille_finie)
