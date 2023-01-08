@@ -368,6 +368,7 @@ def main():
                               print(score, niveau)
                         #retirer_lignes_pleine(grille, grille_finie, nb_lignes_total)
                         change_duree(grille,grille_finie)
+                   
 
                     else:
                         grille = creer_grille(grille_finie)
