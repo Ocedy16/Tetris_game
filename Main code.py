@@ -368,6 +368,8 @@ def main():
                               print(score, niveau)
                         #retirer_lignes_pleine(grille, grille_finie, nb_lignes_total)
                         change_duree(grille,grille_finie)
+                        afficher_score(score)
+                        afficher_niveau(niveau)
                    
 
                     else:
@@ -386,6 +388,8 @@ def main():
                     dessiner_piece_suivante(piece_suivante)
         #retirer_lignes_pleine(grille, grille_finie, nb_lignes_total)
         change_duree(grille,grille_finie)
+        afficher_score(score)
+        afficher_niveau(niveau)  
         #if verifier_defaite(grille_finie,grille):
          #   running=False
           #  vitesse=0
