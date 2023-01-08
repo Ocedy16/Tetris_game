@@ -198,8 +198,25 @@ def change_duree (grille,grille_finie): # quand le nombre de lignes retirées a 
        # nb_lignes_prec = nb_lignes_total
     #return (duree)
 
-# def afficher_score():
-# ecrire le code
+def afficher_score(score):
+    pygame.draw.rect(fenetre, (255, 255, 255), (0,0,92,92))
+    pygame.font.init()
+    font = pygame.font.SysFont('georgia', 20, italic=False, bold=False)
+    text = font.render(f"Score : {str(score)}", True,(0, 0, 0))
+    textrect = text.get_rect()
+    textrect.center = (50,50)
+    fenetre.blit(text, textrect)
+    pygame.display.flip()
+
+def afficher_niveau(niveau):
+    pygame.draw.rect(fenetre, (255, 255, 255), (0,90,120,180))
+    pygame.font.init()
+    font = pygame.font.SysFont('georgia', 20, italic=False, bold=False)
+    text = font.render(f"Niveau : {str(niveau)}", True,(0, 0, 0))
+    textrect = text.get_rect()
+    textrect.center = (57,100)
+    fenetre.blit(text, textrect)
+    pygame.display.flip()
 
 def main_screen():
     begin = True
@@ -258,7 +275,7 @@ def end_screen():
             pygame.display.update()
 
 def main():
-    global vitesse
+    global vitesse, score, niveau
     fenetre.fill((255, 255, 255))
     score = 0
     clock = pygame.time.Clock()
