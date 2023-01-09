@@ -130,16 +130,11 @@ def dessiner_piece(new_piece):
 
 def dessiner_piece_suivante(piece_suivante):
     pygame.draw.rect(fenetre, (255, 255, 255), (15 * 30, 0 * 30, 29 * 6, 29 * 6))
-    new_piece = copy.deepcopy(piece_suivante)
-    new_piece.x = 15
-    new_piece.deplacer()
-    # print (new_piece.x)
-    new_piece.y = 0
-    new_piece.deplacer()
-    for blocs in new_piece.blocs :
-        pygame.draw.rect(fenetre, new_piece.couleur,( blocs[0] * 30, blocs[1] * 30, 29, 29))
+    for blocs in piece_suivante.blocs :
+        pygame.draw.rect(fenetre, piece_suivante.couleur,(375+blocs[0] * 30, 30+blocs[1] * 30, 29, 29))
     pygame.display.update()
     pygame.init()
+    
 
 
 def ecrire_texte_milieu(texte, taille, couleur, surface):
