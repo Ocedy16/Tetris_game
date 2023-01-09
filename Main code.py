@@ -242,14 +242,12 @@ def end_screen():
     print("end")
     begin = True
     fenetre.fill((0,0,0))
-    font = pygame.font.SysFont('inkfree', 30, italic=True, bold=True)  # try inkfree, georgia,impact,dubai,arial
+    font = pygame.font.SysFont('inkfree', 25, italic=True, bold=True)  # try inkfree, georgia,impact,dubai,arial
     text1 = font.render('You loose : press return key to play again', True,(255, 255, 255))
     textrect1 = text1.get_rect()
     textrect1.center = (600 // 2, 300)
     text2=font.render('or press space key to end', True,(255, 255, 255))
-    textrect1 = text1.get_rect()
     textrect2 = text2.get_rect()
-    textrect1.center = (600 // 2, 300)
     textrect2.center = (600 // 2, 400)
 
     while begin:
