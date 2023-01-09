@@ -1,5 +1,6 @@
 import pygame
 import random
+import copy # nécessaire pour deepcopy
 from pygame.locals import *  # importer les constantes
 from pygame import mixer
 import copy
@@ -62,10 +63,7 @@ class Piece(object):
 
 
 
-# ce que j'ai codé pour définir les blocs, c'est toujours la même idée mais je trouve ça plus clair que les tableaux S,Z,... au début
-# par contre il y a peut-être des erreurs ou oublis quand j'ai défini les propriété d'un bloc/tetros
-
-# les couleurs qui correspondent aux blocs dans le jeu classique
+# les couleurs qui correspondent aux blocs 
 couleur_forme = [[0, 191, 255], [238, 201, 0], [255, 0, 0], [0, 238, 0], [171, 130, 255], [255, 128, 0], [139, 76, 57]]  # cyan, jaune, rouge, vert, violet, orange, navy
 
 #dico_forme_couleur_tuple = {formes[1]:(255,0,255), formes[2]:(0,255,0), formes[3]:(255,0,0), formes[4]:(0,0,100), formes[5]:(255,255,0), formes[6]:(0,255,255), formes[7]:(255,100,10)}
