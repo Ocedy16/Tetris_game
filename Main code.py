@@ -23,6 +23,9 @@ J = [[[3, 1], [1, 2], [2, 2], [3, 2]], [[1, 1], [2, 1], [2, 2], [2, 3]], [[1, 2]
 # Être sûre.
 
 formes = [T, S, L, Z, I, O, J]
+pygame.mixer.init()
+mixer.music.load('D:/Dossier Océane/Tetris_music.mp3.mp3')
+pygame.mixer.music.play(-1)
 
 class Piece(object):
     def __init__(self, lettre, couleur, colonne, ligne):
@@ -398,9 +401,5 @@ compteur_lignes=0
 vitesse=0
 niveau=0
 score=0
-"""
-mixer.init()
-mixer.music.load('D:/Dossier Océane/Tetris_music.mp3.mp3')
-mixer.music.play()
-"""
+
 main_screen()
