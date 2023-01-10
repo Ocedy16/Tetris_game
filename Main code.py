@@ -59,9 +59,8 @@ class Piece(object):
 
 
 # les couleurs qui correspondent aux blocs 
-couleur_forme = [[0, 191, 255], [238, 201, 0], [255, 0, 0], [0, 238, 0], [171, 130, 255], [255, 128, 0], [139, 76, 57]]  # cyan, jaune, rouge, vert, violet, orange, navy
+couleur_forme = [[0, 191, 255], [238, 201, 0], [255, 0, 0], [0, 238, 0], [171, 130, 255], [255, 128, 0], [139, 76, 57]]  # bleu, jaune, rouge, vert, violet, orange, marron
 
-#dico_forme_couleur_tuple = {formes[1]:(255,0,255), formes[2]:(0,255,0), formes[3]:(255,0,0), formes[4]:(0,0,100), formes[5]:(255,255,0), formes[6]:(0,255,255), formes[7]:(255,100,10)}
 
 def creer_grille(grille_finie):# liste des blocs avec tuple = couleur et indice du tuple = coordonnées
     grille = [[(0, 0, 0) for x in range(10)] for y in
