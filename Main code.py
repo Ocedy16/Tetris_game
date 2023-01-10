@@ -21,6 +21,7 @@ J = [[[3, 1], [1, 2], [2, 2], [3, 2]], [[1, 1], [2, 1], [2, 2], [2, 3]], [[1, 2]
 # les x et y de combien on doit "bouger" pour tomber sur le bloc. Il faut donc considérer les blocs indépendamment.
 
 formes = [T, S, L, Z, I, O, J]
+
 pygame.mixer.init()
 mixer.music.load('D:/Dossier Océane/Tetris_music.mp3.mp3')
 pygame.mixer.music.play(-1)
