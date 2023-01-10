@@ -5,7 +5,6 @@ from pygame.locals import *  # importer les constantes
 from pygame import mixer
 import copy
 
-# Autre façon de voir les formes. A tester. Mettre toutes les coordonées des zéros dans des listes à l'intérieur d'une liste
 T = [[[2, 1], [2, 2], [1, 2], [3, 2]], [[2, 1], [2, 2], [2, 3], [3, 2]], [[1, 2], [2, 2], [3, 2], [2, 3]],
      [[2, 1], [2, 2], [2, 3], [1, 2]]]
 L = [[[1, 1], [1, 2], [2, 2], [3, 2]], [[2, 1], [2, 2], [1, 3], [2, 3]], [[1, 2], [2, 2], [3, 2], [3, 3]],
@@ -17,12 +16,6 @@ O = [[[2, 2], [3, 2], [2, 3], [3, 3]]]
 J = [[[3, 1], [1, 2], [2, 2], [3, 2]], [[1, 1], [2, 1], [2, 2], [2, 3]], [[1, 2], [2, 2], [3, 2], [1, 3]], [[2, 1], [2, 2], [2, 3], [3, 3]]]
 
 
-# Ainsi de suite avec les autres. Puis lier cela aux coordonnées de la pièce. Ex: le x et le y de la pièce représentent tout en haut à gauche de la pièce et
-# les x et y de combien on doit "bouger" pour tomber sur le bloc. Il faut donc considérer les blocs indépendamment. Peut être implémenter qqc dans la classe.
-# Une chose à tester pour voir si la méthode est la bonne: implémenter une classe dans un autre fichier avec les 4 coordonnées du bloc. Voir si modifier
-# Le x et le y du bloc change bien les sous coordonnées automatiquement. En gros, est ce que le calcul se fait automatiquement. Je pense que oui mais j'aimerais
-# Être sûre.
-
 formes = [T, S, L, Z, I, O, J]
 pygame.mixer.init()
 mixer.music.load('D:/Dossier Océane/Tetris_music.mp3.mp3')
@@ -32,13 +25,10 @@ class Piece(object):
     def __init__(self, lettre, couleur, colonne, ligne):
         self.x = colonne
         self.y = ligne
-        #self.couleur = (random.randint(10, 254), random.randint(10, 254), random.randint(10, 254))
         self.couleur= couleur
         self.lettre = lettre
         self.rotation = 0
         self.forme = self.lettre[self.rotation]
-        # Voir pour peut être ajouter un sous accès liste si on accède d'abord aux formes.
-        #print(f"Piece Constructor / Forme : {self.forme} / X: {self.x} / Y: {self.y}")
         self.bloc_1 = [self.x + self.forme[0][0], self.y + self.forme[0][1]]
         self.bloc_2 = [self.x + self.forme[1][0], self.y + self.forme[1][1]]
         self.bloc_3 = [self.x + self.forme[2][0], self.y + self.forme[2][1]]
@@ -66,7 +56,6 @@ class Piece(object):
 # les couleurs qui correspondent aux blocs 
 couleur_forme = [[0, 191, 255], [238, 201, 0], [255, 0, 0], [0, 238, 0], [171, 130, 255], [255, 128, 0], [139, 76, 57]]  # cyan, jaune, rouge, vert, violet, orange, navy
 
-#dico_forme_couleur_tuple = {formes[1]:(255,0,255), formes[2]:(0,255,0), formes[3]:(255,0,0), formes[4]:(0,0,100), formes[5]:(255,255,0), formes[6]:(0,255,255), formes[7]:(255,100,10)}
 
 def creer_grille(grille_finie):# liste des blocs avec tuple = couleur et indice du tuple = coordonnées
     grille = [[(0, 0, 0) for x in range(10)] for y in
@@ -189,10 +178,6 @@ def change_duree (grille,grille_finie): # quand le nombre de lignes retirées a 
         niveau+=1
         vitesse=niveau*50
         compteur_lignes -= 10
-    #if retirer_lignes_pleine(grille,grille_finie, nb_lignes_total) >= nb_lignes_prec + 1 :
-      #  duree -= 900
-       # nb_lignes_prec = nb_lignes_total
-    #return (duree)
 
 def afficher_score(score):
     pygame.draw.rect(fenetre, (255, 255, 255), (0,0,100,94))
