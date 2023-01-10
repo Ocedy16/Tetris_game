@@ -1,10 +1,11 @@
 import pygame
 import random
 import copy # nécessaire pour deepcopy
-from pygame.locals import *  # importer les constantes
+from pygame.locals import *  
 from pygame import mixer
 import copy
 
+# Autre façon de voir les formes. Mettre toutes les coordonées des zéros dans des listes à l'intérieur d'une liste
 T = [[[2, 1], [2, 2], [1, 2], [3, 2]], [[2, 1], [2, 2], [2, 3], [3, 2]], [[1, 2], [2, 2], [3, 2], [2, 3]],
      [[2, 1], [2, 2], [2, 3], [1, 2]]]
 L = [[[1, 1], [1, 2], [2, 2], [3, 2]], [[2, 1], [2, 2], [1, 3], [2, 3]], [[1, 2], [2, 2], [3, 2], [3, 3]],
@@ -16,6 +17,9 @@ O = [[[2, 2], [3, 2], [2, 3], [3, 3]]]
 J = [[[3, 1], [1, 2], [2, 2], [3, 2]], [[1, 1], [2, 1], [2, 2], [2, 3]], [[1, 2], [2, 2], [3, 2], [1, 3]], [[2, 1], [2, 2], [2, 3], [3, 3]]]
 
 
+# Ainsi de suite avec les autres. Puis lier cela aux coordonnées de la pièce. Ex: le x et le y de la pièce représentent tout en haut à gauche de la pièce et
+# les x et y de combien on doit "bouger" pour tomber sur le bloc. Il faut donc considérer les blocs indépendamment.
+
 formes = [T, S, L, Z, I, O, J]
 pygame.mixer.init()
 mixer.music.load('D:/Dossier Océane/Tetris_music.mp3.mp3')
@@ -25,6 +29,7 @@ class Piece(object):
     def __init__(self, lettre, couleur, colonne, ligne):
         self.x = colonne
         self.y = ligne
+        #self.couleur = (random.randint(10, 254), random.randint(10, 254), random.randint(10, 254))
         self.couleur= couleur
         self.lettre = lettre
         self.rotation = 0
@@ -52,10 +57,10 @@ class Piece(object):
             self.deplacer()
 
 
-
 # les couleurs qui correspondent aux blocs 
 couleur_forme = [[0, 191, 255], [238, 201, 0], [255, 0, 0], [0, 238, 0], [171, 130, 255], [255, 128, 0], [139, 76, 57]]  # cyan, jaune, rouge, vert, violet, orange, navy
 
+#dico_forme_couleur_tuple = {formes[1]:(255,0,255), formes[2]:(0,255,0), formes[3]:(255,0,0), formes[4]:(0,0,100), formes[5]:(255,255,0), formes[6]:(0,255,255), formes[7]:(255,100,10)}
 
 def creer_grille(grille_finie):# liste des blocs avec tuple = couleur et indice du tuple = coordonnées
     grille = [[(0, 0, 0) for x in range(10)] for y in
@@ -68,8 +73,6 @@ def creer_grille(grille_finie):# liste des blocs avec tuple = couleur et indice 
                 c = grille_finie[(j, i)]
                 grille[i][j] = c
     return grille
-
-
 
 
 def save_dict(piece, grille_finie):
@@ -109,8 +112,6 @@ def get_shape():
 
 
 
-
-
 def dessiner_piece(new_piece):
     for blocs in new_piece.blocs:
         pygame.draw.rect(fenetre, new_piece.couleur, (150+blocs[0] * 30, 50 + blocs[1] * 30, 29, 29))
@@ -124,11 +125,6 @@ def dessiner_piece_suivante(piece_suivante):
         pygame.draw.rect(fenetre, piece_suivante.couleur,(375+blocs[0] * 30, 30+blocs[1] * 30, 29, 29))
     pygame.display.update()
     pygame.init()
-    
-
-
-def ecrire_texte_milieu(texte, taille, couleur, surface):
-    return 0
 
 
 def dessiner_grille(grille):
@@ -178,6 +174,7 @@ def change_duree (grille,grille_finie): # quand le nombre de lignes retirées a 
         niveau+=1
         vitesse=niveau*50
         compteur_lignes -= 10
+  
 
 def afficher_score(score):
     pygame.draw.rect(fenetre, (255, 255, 255), (0,0,100,94))
@@ -345,7 +342,7 @@ def main():
                               vitesse=0
                               end_screen()
                               print(score, niveau)
-                        #retirer_lignes_pleine(grille, grille_finie, nb_lignes_total)
+                     
                         change_duree(grille,grille_finie)
                         afficher_score(score)
                         afficher_niveau(niveau)
@@ -365,17 +362,10 @@ def main():
                     dessiner_grille(grille)
                     dessiner_piece(piece)
                     dessiner_piece_suivante(piece_suivante)
-        #retirer_lignes_pleine(grille, grille_finie, nb_lignes_total)
+
         change_duree(grille,grille_finie)
         afficher_score(score)
-        afficher_niveau(niveau)  
-        #if verifier_defaite(grille_finie,grille):
-         #   running=False
-          #  vitesse=0
-           # niveau=0
-           # score=0
-           #  end_screen()
-        # afficher_score()
+        afficher_niveau(niveau) 
 
 
 pygame.init()
