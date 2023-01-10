@@ -30,7 +30,6 @@ class Piece(object):
     def __init__(self, lettre, couleur, colonne, ligne):
         self.x = colonne
         self.y = ligne
-        #self.couleur = (random.randint(10, 254), random.randint(10, 254), random.randint(10, 254))
         self.couleur= couleur
         self.lettre = lettre
         self.rotation = 0
