@@ -195,7 +195,7 @@ def change_duree (grille,grille_finie): # quand le nombre de lignes retirées a 
     #return (duree)
 
 def afficher_score(score):
-    pygame.draw.rect(fenetre, (255, 255, 255), (0,0,92,92))
+    pygame.draw.rect(fenetre, (255, 255, 255), (0,0,100,94))
     pygame.font.init()
     font = pygame.font.SysFont('georgia', 20, italic=False, bold=False)
     text = font.render(f"Score : {score}", True,(0, 0, 0))
